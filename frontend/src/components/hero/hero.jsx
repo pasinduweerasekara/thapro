@@ -1,7 +1,8 @@
 import React from "react";
 import "./hero.css";
-import bgimg from "../../assets/4.png";
+import bgimg from "../../assets/background.jpg";
 import TypingComponent from "../typingcomponent/typingcomponent";
+import heroImg from '../../assets/heroimg.jpg'
 
 function Hero() {
   return (
@@ -11,7 +12,8 @@ function Hero() {
       </div>
       <div id="hero-content">
         <div id="hero-content-section1">
-            <span className="hero-main-text">This is THAPRO,</span>
+            <div id="hero-text">
+            <span className="hero-main-text" id="hero-main-text-name">THAPRO,</span>
           <TypingComponent
           clasName="hero-main-text"
             id={"hero-main-text-typing"}
@@ -24,9 +26,12 @@ function Hero() {
             pause={1000}
             deletingSpeed={20}
           />
+            </div>
+          <span id="hero-btn">SHOP</span>
         </div>
         <div id="hero-content-section2">
-          {" "}
+            <div id="hero-img-container"><img src={heroImg} alt={heroImg} id="hero-img" /></div>
+            
         </div>
       </div>
     </section>

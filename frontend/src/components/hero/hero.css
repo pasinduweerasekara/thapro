@@ -1,20 +1,21 @@
 #hero-container{
     width: 100%;
-    height: calc(100vh);
+    height: 100dvh;
+    height: 100vh;
     position: relative;
-    top: -80px;
+    top: -5rem;
     left: 0;
 }
 #hero-content{
     width: 100%;
     height: 100%;
-    padding: 5rem 1rem 1rem 1rem;
+    padding: 6rem 1rem 1rem 1rem;
     position: absolute;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
 }
@@ -35,19 +36,91 @@
 #hero-content-section1,#hero-content-section2{
     height: 50%;
     width: 100%;
+    padding: 0 2rem;
     max-width: 750px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#hero-content-section1{
+    height: 60%;
+    min-height: 250px;
+}
+
+#hero-content-section2{
+    height: 40%;
+    min-height: 150px;
 }
 
 .hero-main-text{
-    font-weight: 700;
+    font-weight: 400;
+    width: 100%;
     color: #e4e4e4;
-    font-size: 48px;
+    font-size:  clamp(32px, 32px + 2vw, 72px);
 }
 #hero-main-text-typing{
     
     font-weight: 500;
-    font-size: 32px;
-    background-color: rgb(28, 28, 28);
+    font-size:  clamp(16px, 16px + .5vw, 32px);
+    color: rgb(28, 28, 28);
+    background-color: #e4e4e4;
     padding: 0 1rem;
     border-radius: .5rem;
+}
+
+#hero-content-section2{
+    display: flex;
+    justify-content: center;
+}
+#hero-img-container{
+    border-radius: .5rem;
+    overflow: hidden;
+}
+#hero-img{
+    height: 100%;
+    transition: transform 200ms ease;
+}
+#hero-img:hover{
+    transform: scale(1.5);
+}
+#hero-text{
+    height: fit-content;
+    width: 100%;
+    min-height: 200px;
+    text-align: left;
+}
+
+span#hero-btn{
+    padding: .2em 1em;
+    font-size: clamp(16px, 16px + 2vw, 32px);
+    transition: all 200ms ease-in;
+    background-color: #e4e4e4;
+    color: rgb(26, 26, 26);
+    border: 2px solid rgb(26, 26, 26);
+    margin: 0 auto;
+    cursor: pointer;
+}
+span#hero-btn:hover{
+    border-radius: .4em;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid #e4e4e4;
+    color: #e4e4e4;
+}
+
+/* Media queries */
+@media only screen and (min-width: 972px) {
+    #hero-content{
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #hero-content-section1,#hero-content-section2{
+        height: 100%;
+        width: 50%;
+        max-height: 500px;
+        max-width: 750px;
+    }
 }
