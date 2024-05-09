@@ -9,11 +9,16 @@
 a{
   text-decoration: none;
 }
+.noscroll{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 
 /* Navbar styles */
 #navbar {
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 2rem 1rem 1rem;
   height: 80px;
   background-color: var(--primary);
   z-index: 999;
@@ -22,6 +27,13 @@ a{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  left: 0;
+  transition: transform 200ms ease-out;
+}
+.navbar-hide{
+  transform: translateY(-100%);
 }
 #logo-container{
   z-index: 999;
@@ -95,8 +107,8 @@ a{
 }
 #search-close{
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 2rem;
+  right: 2rem;
   font-size: 30px;
   color: #f0f0f0;
   border-radius: 5rem;

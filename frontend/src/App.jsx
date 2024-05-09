@@ -1,4 +1,5 @@
 import './App.css'
+import Hero from './components/hero/hero'
 import Navbar from './components/navbar/navbar'
 
 function App() {
@@ -6,8 +7,8 @@ function App() {
   return (
     <>
     <Navbar/>
-    <h1>Hello Thapro</h1>
-    <p>Kohomada...?</p>
+    <Hero/>
+    <Hero/>
     </>
   )
 }
