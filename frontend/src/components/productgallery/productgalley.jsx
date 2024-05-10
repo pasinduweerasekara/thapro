@@ -5,6 +5,7 @@ import ProductCard from '../productcard/productcard';
 const ProductGallery = ({ productsSet }) => {
   const [currentFeature, setCurrentFeature] = useState('all');
   const [products, setProducts] = useState([]);
+  const [selectedBtn,setSelectedBtn] = useState("all")
 
   useEffect(() => {
     setProducts(productsSet);
@@ -34,16 +35,19 @@ const ProductGallery = ({ productsSet }) => {
       } else {
         setProducts(featureProducts[feature]);
       }
+      setSelectedBtn(feature)
     }
   };
 
   return (
     <div id="product-container">
-      <div className="product-header">HEADER</div>
-      <button onClick={() => handleButtonClick('all')} id="button1">ALL</button>
-      <button onClick={() => handleButtonClick('feature1')} id="button2">FEATURE 1</button>
-      <button onClick={() => handleButtonClick('feature2')} id="button3">FEATURE 2</button>
-      <button onClick={() => handleButtonClick('feature3')} id="button4">FEATURE 3</button>
+      <div className="product-header">Featured Products</div>
+      <div className='product-gallery-btns'>
+      <button onClick={() => handleButtonClick('all')} id="button1" className={selectedBtn=="all"?"product-container-btn selected":"product-container-btn"}>ALL</button>
+      <button onClick={() => handleButtonClick('feature1')} id="button2" className={selectedBtn=="feature1"?"product-container-btn selected":"product-container-btn"}>FEATURE 1</button>
+      <button onClick={() => handleButtonClick('feature2')} id="button3" className={selectedBtn=="feature2"?"product-container-btn selected":"product-container-btn"}>FEATURE 2</button>
+      <button onClick={() => handleButtonClick('feature3')} id="button4" className={selectedBtn=="feature3"?"product-container-btn selected":"product-container-btn"}>FEATURE 3</button>
+      </div>
       <div className="product-internal-container" id="internal-container-id">
         {
                 (products.length!=0)?

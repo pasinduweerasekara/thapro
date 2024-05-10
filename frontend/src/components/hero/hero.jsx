@@ -22,7 +22,7 @@ function Hero() {
               "Unleashing Style, One Stitch at a Time: Your Leather Adventure Awaits!"
             ]}
             loop={true}
-            typingSpeed={80}
+            typingSpeed={100}
             pause={1000}
             deletingSpeed={20}
           />

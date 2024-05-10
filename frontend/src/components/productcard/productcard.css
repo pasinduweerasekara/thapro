@@ -2,8 +2,9 @@
     width: 10%;
     border-radius: .5rem;
     min-width: 280px;
+    border: 1px solid #d6d6d6;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    background-color: rgb(247, 247, 247);
+    background-color: #ffffff;
     height: 300px;
     transition: box-shadow 200ms ease-in;
 }
