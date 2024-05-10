@@ -1,0 +1,20 @@
+.product-internal-container{
+    padding: 1rem;
+    background-color: azure;
+    width: 100%;
+    max-width: 1400px;
+    height: fit-content;
+    overflow-x: scroll;
+    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+}
+.product-internal-container::-webkit-scrollbar {
+    background: transparent;
+}
+.product.show{
+    height: 200px; 
+    width: 350px; 
+    scale: 1;
+    opacity: 1;
+}
