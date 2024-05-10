@@ -1,99 +1,110 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { MdOutlineClose } from "react-icons/md";
+
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const [suggestion, setSugesstion] = useState(false);
   const [search, setSearch] = useState(false);
+  const [scrolPos, setScrPos] = useState([0, 0]);
+  const [navbarHide, setNavbarHide] = useState(false);
+
+
+  if (open || search) {
+    document.querySelector("body").classList.add("noscroll")
+  } else document.querySelector("body").classList.remove("noscroll")
+
+  window.addEventListener('keydown' ,(e)=>{
+    if (e.key == 'Escape') {
+      setSearch(false)
+    }
+  })
+
+  useEffect(() => {
+    window.addEventListener('scroll', getScrPos, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', getScrPos);
+    };
+  }, []);
+
+  const getScrPos = () => {
+    setScrPos(scrolPos.reverse())
+    setScrPos(scrolPos[1] = window.scrollY)
+    if(scrolPos[0] < scrolPos[1]){
+      setNavbarHide(true)
+    }else setNavbarHide(false)
+  }
+
+  const handleSearchClose = () => {
+    setSearch(false);
+  };
 
   return (
-    <nav id="navbar">
+    <nav id="navbar" className={navbarHide?"navbar-hide":""}>
       <div id="logo-container">
         <h1 id="nav-logo">THAPRO</h1>
       </div>
       <ul id="nav-links-container" className={open ? "open" : ""}>
-        <li className="link-item">
-          <a className="nav-link-text" href="/wallets">
+        <li className="link-item" onClick={() => setOpen(false)}>
+          <a className="nav-link-text" href="#">
             Wallets
           </a>
         </li>
-        <li className="link-item">
-          <a className="nav-link-text" href="/belts">
+        <li className="link-item" onClick={() => setOpen(false)}>
+          <a className="nav-link-text" href="#">
             Belts
           </a>
         </li>
-        <li className="link-item">
-          <a className="nav-link-text" href="/accessories">
+        <li className="link-item" onClick={() => setOpen(false)}>
+          <a className="nav-link-text" href="#">
             Accessories
           </a>
         </li>
-        <li className="link-item">
-          <a className="nav-link-text" href="/forher">
+        <li className="link-item" onClick={() => setOpen(false)}>
+          <a className="nav-link-text" href="#">
             For Her
           </a>
         </li>
-        <li className="link-item">
-          <a className="nav-link-text" href="/forhim">
+        <li className="link-item" onClick={() => setOpen(false)}>
+          <a className="nav-link-text" href="#">
             For Him
           </a>
         </li>
-        <li className="link-item">
-          <a className="nav-link-text" href="/custom">
+        <li className="link-item" onClick={() => setOpen(false)}>
+          <a className="nav-link-text" href="#">
             Custom order
           </a>
         </li>
       </ul>
       <div id="menu-icons">
-        <div id="search-bar" className="searchbar-active">
-          <div
-            className={search ? "search-container focus" : "search-container"}
-          >
-            <MdOutlineClose
-            id="search-close"
-            onClick={() => {
-              setSearch(false);
-            }}
-          />
+        <div id="search-bar" className={search ? "searchbar-active" : ""}>
+          <div className={search ? "search-container focus" : "search-container"}>
+            <MdOutlineClose id="search-close" onClick={handleSearchClose} />
             <div className="search-input-container">
               <input
                 type="text"
-                autoFocus
                 id="search-input"
                 name="search-input"
                 placeholder="Search..."
-                onFocus={() => {
-                  setSugesstion(true);
-                }}
-                onBlur={() => {
-                  setSugesstion(false);
-                }}
               />
               <div className="search-icon">
                 <span className="search-icon-inner">
-                <CiSearch className="menu-icon" />
+                  <CiSearch className="menu-icon" />
                 </span>
               </div>
-              {suggestion? (
-              <ul id="suggestion-box">
-                <li>YO Yo</li>
-                <li>YO Yo</li>
-                <li>YO Yo</li>
-                <li>YO Yo</li>
-              </ul>
-            ) :""}
             </div>
           </div>
         </div>
-        {search?"":<CiSearch
-          className="menu-icon"
-          onClick={() => {
-            {
+        {!search && (
+          <CiSearch
+            className="menu-icon"
+            onClick={() => {
               setSearch(true);
-              setOpen(false)
-            }
-          }}
-        />}
+              setOpen(false);
+            }}
+          />
+        )}
         <div className="cart">
           <CiShoppingCart className="menu-icon" />
         </div>
@@ -101,7 +112,7 @@ function Navbar() {
           id="hamburger-btn"
           onClick={() => {
             setOpen(!open);
-            setSearch(false)
+            setSearch(false);
           }}
           className={open ? "btn-open" : ""}
         >
@@ -113,4 +124,5 @@ function Navbar() {
     </nav>
   );
 }
+
 export default Navbar;
