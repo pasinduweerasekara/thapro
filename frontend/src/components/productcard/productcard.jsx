@@ -4,7 +4,7 @@ import './productcard.css'
 function ProductCard({title,description,cardImg,price} = {...props}) {
   return (
     <div className='product-card'>
-        <div className="product-header">
+        <div className="product-card-header">
             <span className="product-title">
                 {title}
             </span>
@@ -17,7 +17,7 @@ function ProductCard({title,description,cardImg,price} = {...props}) {
         </div>
         <div className="product-card-footer">
             <span className="product-price">{price}LKR</span>
-            <div className="product-btn">Click</div>
+            <div className="product-btn">VIEW</div>
         </div>
     </div>
   )
