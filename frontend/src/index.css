@@ -10,3 +10,10 @@ body {
   box-sizing: border-box;
   font-family: "Titillium Web", sans-serif;
 }
+span.devider{
+  display: block;
+  width: 90%;
+  margin: 2rem auto;
+  height: 2px;
+  background-color: #f6f6f6;
+}
