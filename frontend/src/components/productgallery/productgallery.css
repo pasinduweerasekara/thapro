@@ -1,7 +1,6 @@
 #product-container{
     width: 100%;
     padding: 1rem;
-    background-color: #ffffff;
     
 }
 #product-container>.product-header{
@@ -11,11 +10,12 @@
 }
 .product-internal-container{
     width: 100%;
+    padding: 1rem 0;
     max-width: 1400px;
-    height: fit-content;
     overflow-x: scroll;
     margin: 1rem auto;
     display: flex;
+    align-items: center;
     gap: 1rem;
 }
 #product-container>.product-gallery-btns{

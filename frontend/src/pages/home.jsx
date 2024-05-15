@@ -1,13 +1,15 @@
 import React from 'react'
+import './home.css'
+
 import Hero from '../components/hero/hero'
 import ProductGallery from '../components/productgallery/productgallery'
+import FeaturedProduct from '../components/featuredproduct/featuredproduct'
 
 import cardImg1 from '../assets/1.jpg'
 import cardImg2 from '../assets/2.jpg'
 import cardImg3 from '../assets/3.jpg'
 import cardImg4 from '../assets/4.jpg'
 import cardImg5 from '../assets/5.png'
-import FeaturedProduct from '../components/featuredproduct/featuredproduct';
 
 const productsSet = [
     { id: 'product1', feature: 'feature1', title: 'Product 1 f1', description:"This the the descriotion if product 1", price:4500, cardImg:cardImg1 },
