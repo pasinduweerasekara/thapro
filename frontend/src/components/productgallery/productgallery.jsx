@@ -51,7 +51,7 @@ const ProductGallery = ({ productsSet }) => {
       <div className="product-internal-container" id="internal-container-id">
         {
                 (products.length!=0)?
-                    products.map(product => (<ProductCard key={product.id} title={product.title} description={product.description} price={product.price} cardImg={product.cardImg}/>))
+                    products.map(product => (<ProductCard key={product.id} product={product} title={product.title} description={product.description} price={product.price} cardImg={product.cardImg}/>))
                 :
                     <div  className="product show" id="">
                           <p>Empty</p>
