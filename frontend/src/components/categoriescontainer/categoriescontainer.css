@@ -1,0 +1,29 @@
+#categories-inner-container{
+    width: 100%;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+#categories-container-heading{
+    text-align-last: center;
+}
+@media only screen and (min-width: 600px) {
+    #categories-inner-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        grid-gap: 1rem;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    #categories-inner-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 1rem;
+    }
+}
+
