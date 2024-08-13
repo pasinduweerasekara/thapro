@@ -278,7 +278,23 @@ a{
   -o-transition: .25s ease-in-out;
   transition: .25s ease-in-out;
 }
-
+#cart{
+  position: relative;
+}
+#cart-item-count{
+  display: block;
+  position: absolute;
+  font-size: 13px;
+  text-align: center;
+  top: -4px;
+  right: -7px;
+  background-color: #f0f0f0;
+  padding: 0;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  border-radius: 50%;
+}
 #hamburger-btn span:nth-child(1) {
   top: 0px;
 }

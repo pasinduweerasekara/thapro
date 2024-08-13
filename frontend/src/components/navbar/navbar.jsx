@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./navbar.css";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { MdOutlineClose } from "react-icons/md";
+import { cartContext } from "../../context/CartContextProvider";
 
 function Navbar() {
+
+  const {cart} = useContext(cartContext)
+
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState(false);
   const [scrolPos, setScrPos] = useState([0, 0]);
@@ -105,8 +109,10 @@ function Navbar() {
             }}
           />
         )}
-        <div className="cart">
+        <div id="cart">
           <CiShoppingCart className="menu-icon" />
+          {cart.length >0 ?<span id="cart-item-count">{cart.length}</span>:''}
+          
         </div>
         <div
           id="hamburger-btn"

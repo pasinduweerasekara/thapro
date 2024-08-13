@@ -1,6 +1,4 @@
 import './featuredproduct.css'
-import featuredProductImage from '../../assets/2.jpg'
-
 import React from 'react'
 
 function FeaturedProduct({image,price,promotion,title,description}={...props}) {

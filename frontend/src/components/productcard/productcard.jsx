@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './productcard.css'
+import { cartContext } from '../../context/CartContextProvider'
 
-function ProductCard({title,description,cardImg,price} = {...props}) {
+function ProductCard({product,title,description,cardImg,price} = {...props}) {
+
+    const {cart,dispatch} = useContext(cartContext)
+
   return (
     <div className='product-card'>
         <div className="product-image-container">
