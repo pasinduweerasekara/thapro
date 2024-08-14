@@ -4,7 +4,7 @@ import cardImg1 from "../assets/1.jpg";
 import cardImg2 from "../assets/2.jpg";
 import cardImg3 from "../assets/3.jpg";
 import cardImg4 from "../assets/4.jpg";
-import cardImg5 from "../assets/5.png";
+import cardImg5 from "../assets/5.jpg";
 
 const productsSet = [
   {

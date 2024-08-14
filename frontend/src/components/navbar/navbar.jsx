@@ -3,6 +3,8 @@ import "./navbar.css";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { MdOutlineClose } from "react-icons/md";
 import { cartContext } from "../../context/CartContextProvider";
+import {Link, NavLink, Outlet} from 'react-router-dom'
+import Footer from '../footer/footer'
 
 function Navbar() {
   const { cart } = useContext(cartContext);
@@ -51,40 +53,41 @@ function Navbar() {
     setTotalCartItems(totalQuantity);
   }, [cart]);
   return (
+    <>
     <nav id="navbar" className={navbarHide ? "navbar-hide" : ""}>
       <div id="logo-container">
         <h1 id="nav-logo">THAPRO</h1>
       </div>
       <ul id="nav-links-container" className={open ? "open" : ""}>
         <li className="link-item" onClick={() => setOpen(false)}>
-          <a className="nav-link-text" href="#">
+          <NavLink className="nav-link-text" href="#">
             Wallets
-          </a>
+          </NavLink>
         </li>
         <li className="link-item" onClick={() => setOpen(false)}>
-          <a className="nav-link-text" href="#">
+          <NavLink className="nav-link-text" href="#">
             Belts
-          </a>
+          </NavLink>
         </li>
         <li className="link-item" onClick={() => setOpen(false)}>
-          <a className="nav-link-text" href="#">
+          <NavLink className="nav-link-text" href="#">
             Accessories
-          </a>
+          </NavLink>
         </li>
         <li className="link-item" onClick={() => setOpen(false)}>
-          <a className="nav-link-text" href="#">
+          <NavLink className="nav-link-text" href="#">
             For Her
-          </a>
+          </NavLink>
         </li>
         <li className="link-item" onClick={() => setOpen(false)}>
-          <a className="nav-link-text" href="#">
+          <NavLink className="nav-link-text" href="#">
             For Him
-          </a>
+          </NavLink>
         </li>
         <li className="link-item" onClick={() => setOpen(false)}>
-          <a className="nav-link-text" href="#">
+          <NavLink className="nav-link-text" href="#">
             Custom order
-          </a>
+          </NavLink>
         </li>
       </ul>
       <div id="menu-icons">
@@ -100,6 +103,7 @@ function Navbar() {
                 name="search-input"
                 placeholder="Search..."
               />
+              
               <div className="search-icon">
                 <span className="search-icon-inner">
                   <CiSearch className="menu-icon" />
@@ -117,10 +121,12 @@ function Navbar() {
             }}
           />
         )}
+        <Link to='cart'>
         <div id="cart">
           <CiShoppingCart className="menu-icon" />
           {cart.length > 0 ? <span id="cart-item-count">{totalCartItems}</span> : ""}
         </div>
+        </Link>
         <div
           id="hamburger-btn"
           onClick={() => {
@@ -135,6 +141,9 @@ function Navbar() {
         </div>
       </div>
     </nav>
+    <Outlet/>
+    <Footer/>
+    </>
   );
 }
 

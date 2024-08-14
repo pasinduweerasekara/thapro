@@ -1,11 +1,10 @@
-import React from 'react'
-
-const cart = () => {
+import './cart.css'
+const Cart = () => {
   return (
-    <div>
-      
+    <div id='cart-container'>
+      <h1>Cart</h1>
     </div>
   )
 }
 
-export default cart
+export default Cart

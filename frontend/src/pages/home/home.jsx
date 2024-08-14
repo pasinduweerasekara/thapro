@@ -8,7 +8,6 @@ import cardImg4 from '../../assets/4.jpg'
 import CategoriesContainer from '../../components/categoriescontainer/categoriescontainer'
 import { productContext } from '../../context/ProductsProvider'
 import FeaturedProduct from '../../components/featuredproduct/featuredproduct'
-import Card from '../../components/card/Card'
 import cardImg from '../../assets/1.jpg'
 function Home() {
 
