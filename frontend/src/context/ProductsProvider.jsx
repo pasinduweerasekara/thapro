@@ -26,15 +26,6 @@ const productsSet = [
     cardImg: cardImg2,
   },
   {
-    id: "product3",
-    feature: "feature2",
-    title: "Brown leather bifold wallet (veg tan)",
-    description:
-      " long estabished fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
-    price: 4500,
-    cardImg: cardImg3,
-  },
-  {
     id: "product4",
     feature: "feature3",
     title: "croc print card holder (veg tan)",
@@ -51,15 +42,6 @@ const productsSet = [
       " long established fact that a reader will bs, as opposed to using",
     price: 4500,
     cardImg: cardImg5,
-  },
-  {
-    id: "product6",
-    feature: "feature1",
-    title: "croc print card holder (veg tan)",
-    description:
-      " long established fact that a reader will bed by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
-    price: 4500,
-    cardImg: cardImg2,
   },
   {
     id: "product7",

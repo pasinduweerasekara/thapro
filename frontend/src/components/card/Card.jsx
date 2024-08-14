@@ -4,39 +4,27 @@ import { MdAddShoppingCart } from "react-icons/md";
 import { cartContext } from "../../context/CartContextProvider";
 
 const Card = ({ product }) => {
+  const { dispatch } = useContext(cartContext);
+  const [hasClicked, setHasClicked] = useState(false);
 
-    const {dispatch} = useContext(cartContext)
-    const [hasClicked, setHasClicked] = useState(false)
-
-
-    const handleAddtoCart = ()=>{
-        if (hasClicked){
-            dispatch({type:'REMOVE_ITEM',productId:product.id})
-            
-        }else{
-            dispatch({type:'ADD_TO_CART',product:product})
-        }
-        setHasClicked(!hasClicked)
+  const handleAddtoCart = () => {
+    if (hasClicked) {
+      dispatch({ type: 'REMOVE_ITEM', productId: product.id });
+    } else {
+      dispatch({ type: 'ADD_TO_CART', product: product });
     }
+    setHasClicked(!hasClicked);
+  };
 
   return (
-    <div className="card">
-
-      <div className="card__img">
-        <img src={product.cardImg} alt="" />
+    <div className="product-card">
+      <div className="product-img-container">
+        <img src={product.cardImg} alt="" className="product-img"/>
+        <span className="price">LKR {product.price}</span>
       </div>
-
-      <div className="card-content">
-        <div className="card__title">{product.title}</div>
-        <div className="card__subtitle">
-         {product.description}
-        </div>
-        <div className="card__wrapper">
-          <div className="card__price">LKR {product.price}</div>
-          <div className="card__btn__container">
-            <button className={hasClicked?"card__btn selected":"card__btn" }onClick={handleAddtoCart}><MdAddShoppingCart/></button>
-          </div>
-        </div>
+      <div className="product-content">
+        <div className="title">{product.title}</div>
+        <button className="product-btn" onClick={handleAddtoCart}><MdAddShoppingCart/></button>
       </div>
     </div>
   );

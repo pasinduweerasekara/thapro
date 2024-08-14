@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './productgallery.css'; // Import your CSS file if needed
-import ProductCard from '../productcard/productcard';
 import Card from '../card/Card';
 
 const ProductGallery = ({ productsSet }) => {

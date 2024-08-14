@@ -8,8 +8,19 @@ import cardImg4 from '../../assets/4.jpg'
 import CategoriesContainer from '../../components/categoriescontainer/categoriescontainer'
 import { productContext } from '../../context/ProductsProvider'
 import FeaturedProduct from '../../components/featuredproduct/featuredproduct'
-
+import Card from '../../components/card/Card'
+import cardImg from '../../assets/1.jpg'
 function Home() {
+
+  const product = {
+    id: "product1",
+    feature: "feature1",
+    title: "crock print brown card holder (veg tan)",
+    description:
+      " ll be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
+    price: 4500,
+    cardImg: cardImg,
+  }
 
   const productSet = useContext(productContext)
 
