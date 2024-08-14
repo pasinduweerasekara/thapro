@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./card.css";
 import { MdAddShoppingCart } from "react-icons/md";
 import { cartContext } from "../../context/CartContextProvider";
+
 const Card = ({ product }) => {
 
     const {dispatch} = useContext(cartContext)
@@ -9,7 +10,7 @@ const Card = ({ product }) => {
 
 
     const handleAddtoCart = ()=>{
-        if (false){
+        if (hasClicked){
             dispatch({type:'REMOVE_ITEM',productId:product.id})
             
         }else{

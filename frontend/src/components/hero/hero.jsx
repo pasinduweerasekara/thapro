@@ -14,7 +14,8 @@ function Hero() {
         <div id="hero-content-section1">
             <div id="hero-text">
             <span className="hero-main-text" id="hero-main-text-name">THAPRO,</span>
-          <TypingComponent
+            <div>
+            <TypingComponent
           clasName="hero-main-text"
             id={"hero-main-text-typing"}
             phrases={[
@@ -27,12 +28,14 @@ function Hero() {
             deletingSpeed={20}
           />
             </div>
+          
+            </div>
           <span id="hero-btn">SHOP</span>
         </div>
-        <div id="hero-content-section2">
+        {/* <div id="hero-content-section2">
             <div id="hero-img-container"><img src={heroImg} alt={heroImg} id="hero-img" /></div>
             
-        </div>
+        </div> */}
       </div>
     </section>
   );
