@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './productgallery.css'; // Import your CSS file if needed
 import ProductCard from '../productcard/productcard';
+import Card from '../card/Card';
 
 const ProductGallery = ({ productsSet }) => {
   const [currentFeature, setCurrentFeature] = useState('all');
@@ -50,12 +51,14 @@ const ProductGallery = ({ productsSet }) => {
       </div>
       <div className="product-internal-container" id="internal-container-id">
         {
-                (products.length!=0)?
-                    products.map(product => (<ProductCard key={product.id} product={product} title={product.title} description={product.description} price={product.price} cardImg={product.cardImg}/>))
-                :
-                    <div  className="product show" id="">
-                          <p>Empty</p>
-                        </div>
+          
+          (products.length!=0)?
+          products.map(product => (<Card product={product} key={product.id}/>))
+      :
+          <div  className="product show" id="">
+                <p>Empty</p>
+              </div>
+
         }
         
       </div>

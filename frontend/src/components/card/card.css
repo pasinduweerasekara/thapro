@@ -1,0 +1,104 @@
+/* From Uiverse.io by andrew-demchenk0 */ 
+.card {
+    --main-color: #000;
+    --bg-color: #fff;
+   position: relative;
+    width: 320px;
+    background: var(--bg-color);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+  
+  .card__back svg, .card__menu svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .card__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+  
+  .card__img {
+    width: 100%;
+    aspect-ratio: 1 / .75;
+    background: linear-gradient(90deg, #FFF8F7, #F0F7DF);
+    border-radius: 100%;
+    margin-inline: auto;
+  }
+  
+  .card__img img {
+    width: 100%;
+    aspect-ratio: 1 / .75;
+    object-fit: cover;
+  }
+  
+  .card-content{
+    padding: 1rem;
+  }
+  .card__title {
+    font-weight: 600;
+    font-size: 25px;
+    color: var(--main-color);
+  }
+  
+  .card__subtitle {
+    font-weight: 400;
+    height: 72px;
+    margin: 1em 0;
+    overflow: hidden;
+    font-size: 15px;
+    color: var(--main-color);
+    letter-spacing: 0.5px;
+  }
+  
+  .card__price {
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--main-color);
+  }
+  
+  .card__btn__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #F7F7F7;
+    border-radius: 50px;
+  }
+  
+  .card__btn__container-score, .card__btn {
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--main-color);
+  }
+  
+  .card__btn {
+    width: 64px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color ease-in 200ms,color ease-in 200ms;
+  }
+  .card__btn.selected{
+    background-color: #191919;
+    color: #F7F7F7;
+  }
+
+  .card__btn:hover{
+    background-color: #191919;
+    color: #F7F7F7;
+  }
+  
+  .card__btn-plus {
+    background: var(--bg-color);
+  }

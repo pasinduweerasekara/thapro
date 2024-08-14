@@ -1,51 +1,57 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import "./navbar.css";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { MdOutlineClose } from "react-icons/md";
 import { cartContext } from "../../context/CartContextProvider";
 
 function Navbar() {
-
-  const {cart} = useContext(cartContext)
-
+  const { cart } = useContext(cartContext);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState(false);
   const [scrolPos, setScrPos] = useState([0, 0]);
   const [navbarHide, setNavbarHide] = useState(false);
 
-
   if (open || search) {
-    document.querySelector("body").classList.add("noscroll")
-  } else document.querySelector("body").classList.remove("noscroll")
+    document.querySelector("body").classList.add("noscroll");
+  } else document.querySelector("body").classList.remove("noscroll");
 
-  window.addEventListener('keydown' ,(e)=>{
-    if (e.key == 'Escape') {
-      setSearch(false)
+  window.addEventListener("keydown", (e) => {
+    if (e.key == "Escape") {
+      setSearch(false);
     }
-  })
+  });
 
   useEffect(() => {
-    window.addEventListener('scroll', getScrPos, { passive: true });
+    window.addEventListener("scroll", getScrPos, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', getScrPos);
+      window.removeEventListener("scroll", getScrPos);
     };
   }, []);
 
   const getScrPos = () => {
-    setScrPos(scrolPos.reverse())
-    setScrPos(scrolPos[1] = window.scrollY)
-    if(scrolPos[0] < scrolPos[1]){
-      setNavbarHide(true)
-    }else setNavbarHide(false)
-  }
+    setScrPos(scrolPos.reverse());
+    setScrPos((scrolPos[1] = window.scrollY));
+    if (scrolPos[0] < scrolPos[1]) {
+      setNavbarHide(true);
+    } else setNavbarHide(false);
+  };
 
   const handleSearchClose = () => {
     setSearch(false);
   };
 
+  const [totalCartItems, setTotalCartItems] = useState(0);
+
+  useEffect(() => {
+    const totalQuantity = cart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    setTotalCartItems(totalQuantity);
+  }, [cart]);
   return (
-    <nav id="navbar" className={navbarHide?"navbar-hide":""}>
+    <nav id="navbar" className={navbarHide ? "navbar-hide" : ""}>
       <div id="logo-container">
         <h1 id="nav-logo">THAPRO</h1>
       </div>
@@ -83,7 +89,9 @@ function Navbar() {
       </ul>
       <div id="menu-icons">
         <div id="search-bar" className={search ? "searchbar-active" : ""}>
-          <div className={search ? "search-container focus" : "search-container"}>
+          <div
+            className={search ? "search-container focus" : "search-container"}
+          >
             <MdOutlineClose id="search-close" onClick={handleSearchClose} />
             <div className="search-input-container">
               <input
@@ -111,8 +119,7 @@ function Navbar() {
         )}
         <div id="cart">
           <CiShoppingCart className="menu-icon" />
-          {cart.length >0 ?<span id="cart-item-count">{cart.length}</span>:''}
-          
+          {cart.length > 0 ? <span id="cart-item-count">{totalCartItems}</span> : ""}
         </div>
         <div
           id="hamburger-btn"

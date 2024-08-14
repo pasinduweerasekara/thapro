@@ -1,8 +1,27 @@
-export function cartReducer(cart,action) {
+export function cartReducer(cart, action) {
     switch (action.type) {
-        case 'ADD_TO_CART':
-            return [...cart,action.product]
-        default:
-           return cart
+      case "ADD_TO_CART":
+        // Find the existing item in the cart
+        let foundItem = cart.find(item => item.id === action.product.id);
+  
+        if (foundItem) {
+          // Return a new array with the updated quantity for the found item
+          return cart.map(item =>
+            item.id === action.product.id
+              ? { ...item, quantity: item.quantity + 1 } // Return a new object with updated quantity
+              : item // Return the original item
+          );
+        } else {
+          // Return a new array with the new item added
+          return [...cart, { ...action.product, quantity: 1 }];
+        }
+  
+      case "REMOVE_ITEM":
+        // Return a new array excluding the item with the specified ID
+        return cart.filter(item => item.id !== action.productId);
+  
+      default:
+        return cart;
     }
-}
+  }
+  
