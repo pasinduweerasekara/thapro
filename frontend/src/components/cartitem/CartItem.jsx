@@ -22,14 +22,16 @@ useEffect(() => {
         <img src={item.cardImg} alt="" className="cart-img" />
       </div>
       <div className="cart-item-description-container">
-        <span className="cart-item-description">{item.title}</span>
+      <div className="cart-item-description">
+        <span className="cart-item-title">{item.title}</span>
         <span className="singlePrice">LKR {item.price}</span>
-      </div>
-      <div className="car-item-counter-container">
+        </div>
+        <div className="car-item-counter-container">
         <button className="car-item-counter-btn" onClick={()=>{
           if(quantity>1)setQuantity(quantity-1)}}>-</button>
-        <input value={quantity} type="number" min={1}/>
+        <input value={quantity} type="number" min={1} onChange={(e) =>setQuantity(Number(e.target.value))}/>
         <button className="car-item-counter-btn" onClick={()=>setQuantity(quantity+1)}>+</button>
+      </div>
       </div>
       <div className="cart-item-price" onClick={()=>{}}>
         <span className="price">LKR: {totalPrice}</span>
