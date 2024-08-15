@@ -17,3 +17,6 @@ span.devider{
   height: 2px;
   background-color: #f6f6f6;
 }
+ul{
+  text-decoration: none;
+}

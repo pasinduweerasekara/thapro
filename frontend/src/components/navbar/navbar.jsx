@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import "./navbar.css";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
+import { FaChevronDown } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
 import { cartContext } from "../../context/CartContextProvider";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
@@ -53,6 +54,17 @@ function Navbar() {
     setTotalCartItems(totalQuantity);
   }, [cart]);
 
+
+  const handleSubmenuOpen =()=>{
+    document.getElementById("sub-menu").classList.add("active")
+    document.getElementById("drop-down-icon").classList.add("active")
+  }
+  const handleSubmenuClose =()=>{
+    document.getElementById("sub-menu").classList.remove("active")
+    document.getElementById("drop-down-icon").classList.remove("active")
+  }    
+
+
   const navigate = useNavigate();
   return (
     <>
@@ -62,32 +74,44 @@ function Navbar() {
         </div>
         <ul id="nav-links-container" className={open ? "open" : ""}>
           <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="nav-link-text" to="wallets">
+          <NavLink className="nav-link-text" to="/">
+              Home
+            </NavLink>
+          </li>
+          <li onMouseOver={handleSubmenuOpen} onMouseOut={handleSubmenuClose} className="link-item">
+            <NavLink className="nav-link-text" to="/products">
+              Products <FaChevronDown id="drop-down-icon"/>
+            </NavLink>
+            <ul id="sub-menu">
+            <li>
+          <NavLink className="sub-menu-link-text" to="wallets">
               Wallets
             </NavLink>
           </li>
           <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="nav-link-text" to="belts">
+            <NavLink className="sub-menu-link-text" to="belts">
               Belts
             </NavLink>
-          </li>
-          <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="nav-link-text" to="accessories">
+            </li>
+            <li className="link-item" onClick={() => setOpen(false)}>
+            <NavLink className="sub-menu-link-text" to="accessories">
               Accessories
             </NavLink>
           </li>
           <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="nav-link-text" to="women">
+            <NavLink className="sub-menu-link-text" to="women">
               For Her
             </NavLink>
           </li>
           <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="nav-link-text" to="men">
+            <NavLink className="sub-menu-link-text" to="men">
               For Him
             </NavLink>
           </li>
+          </ul>
+          </li>
           <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="nav-link-text" href="#">
+            <NavLink className="menu-link-text" to="/">
               Custom order
             </NavLink>
           </li>
