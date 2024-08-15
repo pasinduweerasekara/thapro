@@ -1,4 +1,7 @@
 #cart-container{
     padding-top: 96px;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }

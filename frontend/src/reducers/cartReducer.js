@@ -19,6 +19,13 @@ export function cartReducer(cart, action) {
       case "REMOVE_ITEM":
         // Return a new array excluding the item with the specified ID
         return cart.filter(item => item.id !== action.productId);
+
+        case "UPDATE_ITEM":
+          return cart.map(item =>
+            item.id === action.product.id
+              ? { ...item, quantity: action.quantity } // Return a new object with updated quantity
+              : item // Return the original item
+          );
   
       default:
         return cart;
