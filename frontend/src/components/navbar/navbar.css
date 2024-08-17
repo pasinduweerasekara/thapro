@@ -8,7 +8,6 @@
 /* Global styles */
 a{
   text-decoration: none;
-  color: var(--secondary);
 }
 .noscroll{
   width: 100vw;
@@ -81,7 +80,7 @@ li{
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   background-color: var(--primary);
   background-color: var(--menu);
   position: absolute;
@@ -106,43 +105,43 @@ li{
       -ms-transform: translateY(-1rem) translateX(100%);
           transform: translateY(-1rem) translateX(100%);
 }
+.link-item{
+  color: var(--secondary);
+}
 .open{
   -webkit-transform: translateY(-1rem) translateX(0%) !important;
       -ms-transform: translateY(-1rem) translateX(0%) !important;
           transform: translateY(-1rem) translateX(0%) !important;
 }
-
 #drop-down-icon{
-  font-size: 1em;
-  position: relative;
-  top: 4px;
-  right: -4px;
-  transition: transform 200ms ease;
+  display: none;
 }
-
-#drop-down-icon.active{
-  transform: rotate(180deg);
+#sub-menu-link{
+  position: relative;
 }
 
 #sub-menu{
   border-radius: .5rem;
-  padding: 1rem;
   width: 100%;
-  position: absolute;
+  min-width: 200px;
   max-width: 200px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
   background-color: #222222;
-  opacity: 0;
-  visibility:hidden;
-  transition: opacity 200ms ease-in;
+  top: 24px;
+  left: -7px;
 }
-#sub-menu.active{
-  visibility: visible;
-  opacity: 1;
+#sub-menu-link{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
+.sub-menu-link-text{
+  color: var(--secondary);
+}
+
 .nav-link-text{
   color: var(--secondary);
 }
@@ -407,5 +406,33 @@ li{
     -webkit-transform: none !important;
         -ms-transform: none !important;
             transform: none !important;
+  }
+  #sub-menu{
+    
+    padding: 1rem;
+    position: absolute;
+    max-width: 200px;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    opacity: 0;
+    visibility:hidden;
+    transition: opacity 200ms ease-in;
+  }
+  #sub-menu.active{
+    visibility: visible;
+    opacity: 1;
+  }
+  #drop-down-icon{
+    display: inline-block;
+    font-size: 1em;
+    position: relative;
+    top: 4px;
+    right: -4px;
+    transition: transform 200ms ease;
+  }
+  
+  #drop-down-icon.active{
+    transform: rotate(180deg);
   }
 }

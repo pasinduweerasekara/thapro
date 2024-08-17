@@ -44,6 +44,7 @@
     font-weight: 600;
 }
 .car-item-counter-container{
+    height: 1.5rem;
     width: 80px;
     display: flex;
     justify-content: space-between;
@@ -53,7 +54,8 @@
     background-color: white;
     border: none;
     font-weight: 600;
-    padding: 0 .5em;
+    height: 100%;
+    padding: 0em .5em;
     transition: background-color 200ms ease,
                 color 200ms ease-in;
 }
@@ -81,12 +83,13 @@
     -moz-appearance: textfield;
 }
 .cart-item-delete-btn{
-    border-radius: .1rem;
+    border-radius: .2rem;
     background-color: white;
     border: none;
     font-size: 1.2rem;
+    line-height: 1.2;
     font-weight: 600;
-    padding: .1em .2em;
+    padding: 0em .5em;
     transition: background-color 200ms ease,
                 color 200ms ease-in;
 }

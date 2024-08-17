@@ -1,11 +1,12 @@
+import PageHero from '../../components/pagehero/PageHero'
 import './forhim.css'
-
+import bgImg from '../../assets/4.jpg'
 import React from 'react'
 
 const FoHim = () => {
   return (
     <div>
-      <h1>For Him</h1>
+    <PageHero bgimg={bgImg} pageName={"For Him"}/>
     </div>
   )
 }

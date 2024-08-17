@@ -13,7 +13,7 @@ const productsSet = [
     title: "crock print brown card holder (veg tan)",
     description:
       " ll be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
-    price: 450.00,
+    price: 4500,
     cardImg: cardImg1,
   },
   {
@@ -22,7 +22,7 @@ const productsSet = [
     title: "Black leather bifold wallet (veg tan)",
     description:
       " long estarem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
-    price: 6250.00,
+    price: 6250,
     cardImg: cardImg2,
   },
   {
@@ -31,7 +31,7 @@ const productsSet = [
     title: "croc print card holder (veg tan)",
     description:
       " long established fact that a reution of letters, as opposed to using",
-    price: 320.00,
+    price: 3200,
     cardImg: cardImg1,
   },
   {
@@ -40,7 +40,7 @@ const productsSet = [
     title: "Green Wallet (veg tan)",
     description:
       " long established fact that a reader will bs, as opposed to using",
-    price: 450.00,
+    price: 4500,
     cardImg: cardImg5,
   },
   {
@@ -49,7 +49,7 @@ const productsSet = [
     title: "Black leather bifold wallet (veg tan)",
     description:
       " long establ will be distracted by the readable con of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
-    price: 6250.00,
+    price: 6250,
     cardImg: cardImg4,
   },
   {
@@ -58,7 +58,7 @@ const productsSet = [
     title: "croc print card holder (veg tan)",
     description:
       " long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
-    price: 450.00,
+    price: 4500,
     cardImg: cardImg2,
   },
   {
@@ -67,7 +67,7 @@ const productsSet = [
     title: "green-wallet-veg-tan",
     description:
       " long established fact that a reade the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
-    price: 320.00,
+    price: 3200,
     cardImg: cardImg5,
   },
   {
@@ -75,7 +75,7 @@ const productsSet = [
     feature: "feature1",
     title: "Black leather bifold wallet (veg tan)",
     description:' long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using',
-        price: 450.00,
+        price: 4500,
     cardImg: cardImg3,
   },
 ];

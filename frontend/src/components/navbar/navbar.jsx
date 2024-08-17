@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useState, useRef, useCallback } from "react";
 import "./navbar.css";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { FaChevronDown } from "react-icons/fa";
@@ -11,40 +11,42 @@ function Navbar() {
   const { cart } = useContext(cartContext);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState(false);
-  const [scrolPos, setScrPos] = useState([0, 0]);
   const [navbarHide, setNavbarHide] = useState(false);
+  const [totalCartItems, setTotalCartItems] = useState(0);
+  const lastScrollPos = useRef(0); // Use useRef to track scroll position without causing re-renders
+  const navigate = useNavigate();
 
-  if (open || search) {
-    document.querySelector("body").classList.add("noscroll");
-  } else document.querySelector("body").classList.remove("noscroll");
+  const handleScroll = useCallback(() => {
+    const currentScrollPos = window.scrollY;
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key == "Escape") {
-      setSearch(false);
+    if (lastScrollPos.current < currentScrollPos && !navbarHide) {
+      setNavbarHide(true);
+    } else if (lastScrollPos.current > currentScrollPos && navbarHide) {
+      setNavbarHide(false);
     }
-  });
+
+    lastScrollPos.current = currentScrollPos;
+  }, [navbarHide]);
 
   useEffect(() => {
-    window.addEventListener("scroll", getScrPos, { passive: true });
+    const debouncedHandleScroll = debounce(handleScroll, 100);
 
+    window.addEventListener("scroll", debouncedHandleScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", getScrPos);
+      window.removeEventListener("scroll", debouncedHandleScroll);
     };
+  }, [handleScroll]);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        setSearch(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
   }, []);
-
-  const getScrPos = () => {
-    setScrPos(scrolPos.reverse());
-    setScrPos((scrolPos[1] = window.scrollY));
-    if (scrolPos[0] < scrolPos[1]) {
-      setNavbarHide(true);
-    } else setNavbarHide(false);
-  };
-
-  const handleSearchClose = () => {
-    setSearch(false);
-  };
-
-  const [totalCartItems, setTotalCartItems] = useState(0);
 
   useEffect(() => {
     const totalQuantity = cart.reduce(
@@ -54,18 +56,20 @@ function Navbar() {
     setTotalCartItems(totalQuantity);
   }, [cart]);
 
+  useEffect(() => {
+    document.body.classList.toggle("noscroll", open || search);
+  }, [open, search]);
 
-  const handleSubmenuOpen =()=>{
-    document.getElementById("sub-menu").classList.add("active")
-    document.getElementById("drop-down-icon").classList.add("active")
-  }
-  const handleSubmenuClose =()=>{
-    document.getElementById("sub-menu").classList.remove("active")
-    document.getElementById("drop-down-icon").classList.remove("active")
-  }    
+  const handleSubmenuOpen = () => {
+    document.getElementById("sub-menu").classList.add("active");
+    document.getElementById("drop-down-icon").classList.add("active");
+  };
 
-
-  const navigate = useNavigate();
+  const handleSubmenuClose = () => {
+    document.getElementById("sub-menu").classList.remove("active");
+    document.getElementById("drop-down-icon").classList.remove("active");
+  };
+  
   return (
     <>
       <nav id="navbar" className={navbarHide ? "navbar-hide" : ""}>
@@ -74,54 +78,48 @@ function Navbar() {
         </div>
         <ul id="nav-links-container" className={open ? "open" : ""}>
           <li className="link-item" onClick={() => setOpen(false)}>
-          <NavLink className="nav-link-text" to="/">
+            <NavLink className="nav-link-text" to="/">
               Home
             </NavLink>
           </li>
-          <li onMouseOver={handleSubmenuOpen} onMouseOut={handleSubmenuClose} className="link-item">
-            <NavLink className="nav-link-text" to="/products">
-              Products <FaChevronDown id="drop-down-icon"/>
+          <li
+            onMouseEnter={handleSubmenuOpen}
+            onMouseLeave={handleSubmenuClose}
+            className="link-item"
+            id="sub-menu-link"
+          >
+            <NavLink
+              className="nav-link-text"
+              to="/products"
+              onClick={() => setOpen(false)}
+            >
+              Products <FaChevronDown id="drop-down-icon" />
             </NavLink>
             <ul id="sub-menu">
-            <li>
-          <NavLink className="sub-menu-link-text" to="wallets">
-              Wallets
+              {["wallets", "belts", "accessories", "women", "men"].map((item) => (
+                <li key={item} className="link-item" onClick={() => setOpen(false)}>
+                  <NavLink className="sub-menu-link-text" to={item}>
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </li>
+          <li className="link-item" onClick={() => setOpen(false)}>
+            <NavLink className="nav-link-text" to="/">
+              Custom Order
             </NavLink>
           </li>
           <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="sub-menu-link-text" to="belts">
-              Belts
-            </NavLink>
-            </li>
-            <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="sub-menu-link-text" to="accessories">
-              Accessories
-            </NavLink>
-          </li>
-          <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="sub-menu-link-text" to="women">
-              For Her
-            </NavLink>
-          </li>
-          <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="sub-menu-link-text" to="men">
-              For Him
-            </NavLink>
-          </li>
-          </ul>
-          </li>
-          <li className="link-item" onClick={() => setOpen(false)}>
-            <NavLink className="menu-link-text" to="/">
-              Custom order
+            <NavLink className="nav-link-text" to="/about">
+              About
             </NavLink>
           </li>
         </ul>
         <div id="menu-icons">
           <div id="search-bar" className={search ? "searchbar-active" : ""}>
-            <div
-              className={search ? "search-container focus" : "search-container"}
-            >
-              <MdOutlineClose id="search-close" onClick={handleSearchClose} />
+            <div className={search ? "search-container focus" : "search-container"}>
+              <MdOutlineClose id="search-close" onClick={() => setSearch(false)} />
               <div className="search-input-container">
                 <input
                   type="text"
@@ -129,7 +127,6 @@ function Navbar() {
                   name="search-input"
                   placeholder="Search..."
                 />
-
                 <div className="search-icon">
                   <span className="search-icon-inner">
                     <CiSearch className="menu-icon" />
@@ -150,10 +147,8 @@ function Navbar() {
           <Link to="cart">
             <div id="cart" onClick={() => setOpen(false)}>
               <CiShoppingCart className="menu-icon" />
-              {cart.length > 0 ? (
+              {cart.length > 0 && (
                 <span id="cart-item-count">{totalCartItems}</span>
-              ) : (
-                ""
               )}
             </div>
           </Link>
@@ -175,6 +170,15 @@ function Navbar() {
       <Footer />
     </>
   );
+}
+
+// Utility function to debounce the scroll event handler
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
 }
 
 export default Navbar;

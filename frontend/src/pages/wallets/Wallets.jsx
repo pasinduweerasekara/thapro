@@ -1,11 +1,12 @@
 import './wallets.css'
-
+import bgImg from '../../assets/wallets.jpg'
 import React from 'react'
+import PageHero from '../../components/pagehero/PageHero'
 
 const Wallets = () => {
   return (
     <div id="wallets-container">
-        <h1>Wallets</h1>
+      <PageHero bgimg={bgImg} pageName={"Wallets"}/>
     </div>
   )
 }

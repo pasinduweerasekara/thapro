@@ -24,7 +24,7 @@ useEffect(() => {
       <div className="cart-item-description-container">
       <div className="cart-item-description">
         <span className="cart-item-title">{item.title}</span>
-        <span className="singlePrice">LKR {item.price}</span>
+        <span className="singlePrice">LKR {parseFloat(item.price).toFixed(2)}</span>
         </div>
         <div className="car-item-counter-container">
         <button className="car-item-counter-btn" onClick={()=>{
@@ -34,7 +34,7 @@ useEffect(() => {
       </div>
       </div>
       <div className="cart-item-price" onClick={()=>{}}>
-        <span className="price">LKR: {totalPrice}</span>
+        <span className="price">LKR: {parseFloat(totalPrice).toFixed(2)}</span>
       </div>
       <button className="cart-item-delete-btn" onClick={()=>dispatch({type:'REMOVE_ITEM',productId:item.id})}>
         <MdClose />

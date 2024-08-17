@@ -1,9 +1,11 @@
 import React from 'react'
 import './products.css'
+import PageHero from '../../components/pagehero/PageHero'
+import bgImg from '../../assets/1.jpg'
 const Products = () => {
   return (
     <div>
-      <h1>Products</h1>
+      <PageHero bgimg={bgImg} pageName={"Products"}/>
     </div>
   )
 }

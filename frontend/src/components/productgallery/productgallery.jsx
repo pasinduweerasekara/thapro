@@ -49,6 +49,7 @@ const ProductGallery = ({ productsSet }) => {
       <button onClick={() => handleButtonClick('feature3')} id="button4" className={selectedBtn=="feature3"?"product-container-btn selected":"product-container-btn"}>FEATURE 3</button>
       </div>
       <div className="product-internal-container" id="internal-container-id">
+        
         {
           
           (products.length!=0)?
