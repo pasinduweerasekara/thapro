@@ -2,7 +2,7 @@ import { createBrowserRouter, createRoutesFromChildren, Route, RouterProvider } 
 import './App.css'
 import Navbar from './components/navbar/navbar'
 import Home from './pages/home/home'
-import Cart from './pages/cart/Cart'
+import Cart from './pages/cart/cart'
 import Wallets from './pages/wallets/Wallets'
 import Belts from './pages/belts/Belts'
 import Accessories from './pages/accessories/Accessories'

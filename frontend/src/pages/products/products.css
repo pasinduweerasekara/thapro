@@ -1,0 +1,17 @@
+#products-container{
+    display: flex;
+
+}
+#filters-container{
+    width: 100%;
+    background-color: aqua;
+    max-width: 300px;
+}
+#filters-content{
+    border: 2px solid green;
+    width: 100%;
+    height: 400px;
+    position: sticky;
+    top: 80px;
+    background-color: thistle;
+}

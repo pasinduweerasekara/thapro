@@ -9,85 +9,100 @@ import cardImg5 from "../assets/5.jpg";
 const productsSet = [
   {
     id: "product1",
+    for: "men",
+    category: "accessory",
     feature: "feature1",
-    title: "crock print brown card holder (veg tan)",
+    title: "Crock Print Brown Card Holder (Veg Tan)",
     description:
-      " ll be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
+      "This card holder is made from high-quality vegetable-tanned leather with a crock print design.",
     price: 4500,
     cardImg: cardImg1,
   },
   {
     id: "product2",
+    for: "women",
+    category: "wallet",
     feature: "feature3",
-    title: "Black leather bifold wallet (veg tan)",
+    title: "Black Leather Bifold Wallet (Veg Tan)",
     description:
-      " long estarem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
+      "A sleek and stylish bifold wallet made from vegetable-tanned black leather.",
     price: 6250,
     cardImg: cardImg2,
   },
   {
     id: "product4",
+    for: "men",
     feature: "feature3",
-    title: "croc print card holder (veg tan)",
+    category: "cardholder",
+    title: "Croc Print Card Holder (Veg Tan)",
     description:
-      " long established fact that a reution of letters, as opposed to using",
+      "A compact and elegant card holder with a crocodile print, perfect for any occasion.",
     price: 3200,
     cardImg: cardImg1,
   },
   {
     id: "product5",
     feature: "feature1",
-    title: "Green Wallet (veg tan)",
+    category: "belt",
+    for: "unisex",
+    title: "Green Wallet (Veg Tan)",
     description:
-      " long established fact that a reader will bs, as opposed to using",
+      "A durable and stylish green wallet made from vegetable-tanned leather.",
     price: 4500,
     cardImg: cardImg5,
   },
   {
     id: "product7",
     feature: "feature3",
-    title: "Black leather bifold wallet (veg tan)",
+    category: "wallet",
+    for: "unisex",
+    title: "Black Leather Bifold Wallet (Veg Tan)",
     description:
-      " long establ will be distracted by the readable con of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
+      "A versatile bifold wallet that combines functionality with classic style.",
     price: 6250,
     cardImg: cardImg4,
   },
   {
     id: "product8",
     feature: "feature2",
-    title: "croc print card holder (veg tan)",
+    for: "women",
+    category: "bifoldwallet",
+    title: "Croc Print Card Holder (Veg Tan)",
     description:
-      " long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
+      "An elegant card holder featuring a croc print design, perfect for the modern woman.",
     price: 4500,
     cardImg: cardImg2,
   },
   {
     id: "product9",
     feature: "feature3",
-    title: "green-wallet-veg-tan",
+    category: "cardholder",
+    for: "women",
+    title: "Green Wallet (Veg Tan)",
     description:
-      " long established fact that a reade the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using",
+      "A sophisticated wallet with a rich green color, made from vegetable-tanned leather.",
     price: 3200,
     cardImg: cardImg5,
   },
   {
     id: "product10.00",
     feature: "feature1",
-    title: "Black leather bifold wallet (veg tan)",
-    description:' long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using',
-        price: 4500,
+    category: "wallet",
+    for: "men",
+    title: "Black Leather Bifold Wallet (Veg Tan)",
+    description:
+      "A classic bifold wallet crafted from vegetable-tanned black leather, perfect for men.",
+    price: 4500,
     cardImg: cardImg3,
   },
 ];
 
-export const productContext = createContext();
+export const ProductContext = createContext();
 
-const ProductsProvider = ({ children }) => {
+export const ProductsProvider = ({ children }) => {
   return (
-    <productContext.Provider value={productsSet}>
+    <ProductContext.Provider value={productsSet}>
       {children}
-    </productContext.Provider>
+    </ProductContext.Provider>
   );
 };
-
-export default ProductsProvider;

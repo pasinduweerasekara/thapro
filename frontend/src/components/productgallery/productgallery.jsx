@@ -41,7 +41,6 @@ const ProductGallery = ({ productsSet }) => {
 
   return (
     <div id="product-container">
-      <h1 className="product-header">Featured Products</h1>
       <div className='product-gallery-btns'>
       <button onClick={() => handleButtonClick('all')} id="button1" className={selectedBtn=="all"?"product-container-btn selected":"product-container-btn"}>ALL</button>
       <button onClick={() => handleButtonClick('feature1')} id="button2" className={selectedBtn=="feature1"?"product-container-btn selected":"product-container-btn"}>FEATURE 1</button>

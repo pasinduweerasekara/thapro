@@ -6,7 +6,7 @@ import ProductGallery from '../../components/productgallery/productgallery'
 
 import cardImg4 from '../../assets/4.jpg'
 import CategoriesContainer from '../../components/categoriescontainer/categoriescontainer'
-import { productContext } from '../../context/ProductsProvider'
+import { ProductContext} from '../../context/ProductsProvider'
 import FeaturedProduct from '../../components/featuredproduct/featuredproduct'
 import cardImg from '../../assets/1.jpg'
 function Home() {
@@ -21,7 +21,7 @@ function Home() {
     cardImg: cardImg,
   }
 
-  const productSet = useContext(productContext)
+  const productSet = useContext(ProductContext)
 
   return (
     <>
