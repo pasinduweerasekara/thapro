@@ -90,7 +90,7 @@ function Navbar() {
           >
             <NavLink
               className="nav-link-text"
-              to="/products"
+              to="/products/all"
               onClick={() => setOpen(false)}
             >
               Products <FaChevronDown id="drop-down-icon" />
@@ -98,7 +98,7 @@ function Navbar() {
             <ul id="sub-menu">
               {["wallets", "belts", "accessories", "women", "men"].map((item) => (
                 <li key={item} className="link-item" onClick={() => setOpen(false)}>
-                  <NavLink className="sub-menu-link-text" to={item}>
+                  <NavLink className="sub-menu-link-text" to={`products/${item}`}>
                     {item.charAt(0).toUpperCase() + item.slice(1)}
                   </NavLink>
                 </li>

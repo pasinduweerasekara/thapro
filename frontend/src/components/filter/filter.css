@@ -1,0 +1,10 @@
+#filter-container{
+    min-height: 100vh;
+}
+#filter-content{
+    position: sticky;
+    top: 80px;
+    height: 400px;
+    width: 200px;
+    background-color: thistle;
+}

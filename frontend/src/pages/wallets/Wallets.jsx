@@ -1,12 +1,16 @@
 import './wallets.css'
 import bgImg from '../../assets/wallets.jpg'
-import React from 'react'
+import React, { useContext } from 'react'
 import PageHero from '../../components/pagehero/PageHero'
+import PageContent from '../../components/pagecontent/PageContent'
+import { ProductContext } from '../../context/ProductsProvider'
 
 const Wallets = () => {
+  const products = useContext(ProductContext)
   return (
     <div id="wallets-container">
       <PageHero bgimg={bgImg} pageName={"Wallets"}/>
+      <PageContent products={products}/>
     </div>
   )
 }
