@@ -10,7 +10,7 @@ const productsSet = [
   {
     id: "product1",
     for: "men",
-    category: "accessory",
+    category: "accessories",
     feature: "feature1",
     title: "Crock Print Brown Card Holder (Veg Tan)",
     description:
@@ -21,7 +21,7 @@ const productsSet = [
   {
     id: "product2",
     for: "women",
-    category: "wallet",
+    category: "wallets",
     feature: "feature3",
     title: "Black Leather Bifold Wallet (Veg Tan)",
     description:
@@ -33,7 +33,7 @@ const productsSet = [
     id: "product4",
     for: "men",
     feature: "feature3",
-    category: "cardholder",
+    category: "wallets",
     title: "Croc Print Card Holder (Veg Tan)",
     description:
       "A compact and elegant card holder with a crocodile print, perfect for any occasion.",
@@ -43,7 +43,7 @@ const productsSet = [
   {
     id: "product5",
     feature: "feature1",
-    category: "belt",
+    category: "belts",
     for: "unisex",
     title: "Green Wallet (Veg Tan)",
     description:
@@ -54,7 +54,7 @@ const productsSet = [
   {
     id: "product7",
     feature: "feature3",
-    category: "wallet",
+    category: "wallets",
     for: "unisex",
     title: "Black Leather Bifold Wallet (Veg Tan)",
     description:
@@ -66,7 +66,7 @@ const productsSet = [
     id: "product8",
     feature: "feature2",
     for: "women",
-    category: "bifoldwallet",
+    category: "wallets",
     title: "Croc Print Card Holder (Veg Tan)",
     description:
       "An elegant card holder featuring a croc print design, perfect for the modern woman.",
@@ -76,7 +76,7 @@ const productsSet = [
   {
     id: "product9",
     feature: "feature3",
-    category: "cardholder",
+    category: "wallets",
     for: "women",
     title: "Green Wallet (Veg Tan)",
     description:
@@ -87,7 +87,7 @@ const productsSet = [
   {
     id: "product10.00",
     feature: "feature1",
-    category: "wallet",
+    category: "wallets",
     for: "men",
     title: "Black Leather Bifold Wallet (Veg Tan)",
     description:
