@@ -28,11 +28,11 @@ const Card = ({ product }) => {
         <img src={product.cardImg} alt="" className="product-img"/>
         <span className="price">LKR {parseFloat(product.price).toFixed(2)}</span>
       </div>
-      <div className="product-content">
+      <div className="product-content" onClick={handleClick}>
         <span className="title">{product.title}</span>
         <span className="description" >{product.description}</span>
-        <button className={hasClicked?"product-btn selected":"product-btn"} onClick={handleAddtoCart}>ADD  <MdAddShoppingCart/></button>
       </div>
+      <button className={hasClicked?"product-btn selected":"product-btn"} onClick={handleAddtoCart}>ADD  <MdAddShoppingCart/></button>
     </div>
   );
 };

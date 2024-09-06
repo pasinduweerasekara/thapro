@@ -85,7 +85,7 @@ const productsSet = [
     cardImg: cardImg5,
   },
   {
-    id: "product10.00",
+    id: "product10",
     feature: "feature1",
     category: "wallets",
     for: "men",
