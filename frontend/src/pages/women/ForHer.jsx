@@ -8,8 +8,7 @@ const ForHer = () => {
   const products = useContext(ProductContext)
   return (
     <div>
-      <PageHero bgimg={bgImg} pageName={"For Her"}/>
-      <PageContent products={products}/>
+      <PageContent products={products} title="Women"/>
     </div>
   )
 }

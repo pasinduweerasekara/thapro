@@ -9,8 +9,7 @@ const FoHim = () => {
   const products = useContext(ProductContext)
   return (
     <div>
-    <PageHero bgimg={bgImg} pageName={"For Him"}/>
-    <PageContent products={products}/>
+    <PageContent products={products} title="Men"/>
     </div>
   )
 }

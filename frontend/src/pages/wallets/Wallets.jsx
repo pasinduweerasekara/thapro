@@ -9,8 +9,7 @@ const Wallets = () => {
   const products = useContext(ProductContext)
   return (
     <div id="wallets-container">
-      <PageHero bgimg={bgImg} pageName={"Wallets"}/>
-      <PageContent products={products}/>
+      <PageContent products={products} title="Wallets"/>
     </div>
   )
 }

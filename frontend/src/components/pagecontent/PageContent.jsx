@@ -1,11 +1,9 @@
 import React from 'react'
 import ProductGallery from '../productgallery/productgallery'
-import Filter from '../filter/Filter'
 
-const PageContent = ({products}) => {
+const PageContent = ({products,title}) => {
   return (
-    <div id='content'>
-      <Filter/>
+    <div id=''>
       <ProductGallery productsSet={products}/>
       </div>
   )

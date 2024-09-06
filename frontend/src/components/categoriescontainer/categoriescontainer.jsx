@@ -14,9 +14,6 @@ function CategoriesContainer() {
             <CategoriesCard img={cardImg1} title={"Wallets"}/>
             <CategoriesCard img={cardImg2} title={"Bags"}/>
             <CategoriesCard img={cardImg3} title={"Accessories"}/>
-            <CategoriesCard img={cardImg2} title={"Bags"}/>
-            <CategoriesCard img={cardImg3} title={"Accessories"}/>
-            <CategoriesCard img={cardImg1} title={"Wallets"}/>
     </div>
     </div>
   )
