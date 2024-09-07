@@ -1,81 +1,106 @@
-
-.product-card{
-    max-width: 350px;
-    align-self: center;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    transition: box-shadow 200ms ease-in,
-                transform 200ms ease-in;
-    border-radius: .2rem;
+/* Shopify-inspired Card Container */
+.product-card {
+    width: 300px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
     overflow: hidden;
+    background-color: #fff;
     cursor: pointer;
-}
-.product-card:hover{
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border: 1px solid #e5e5e5;
+  }
+  
+  .product-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 20px;
     transform: scale(1.02);
-}
-.product-img-container{
+  }
+  
+  /* Image Section with Consistent Dimensions */
+  .product-img-container {
     position: relative;
-    height: fit-content;
-}
-.product-img-container .price{
-    position: absolute;
-    bottom: 6px;
-    right: 0;
-    border-radius: 1rem;
-    background-color: #141414;
-    color: white;
-    padding: .1em .5em;
-    border-radius: .1em;
-}
-.product-img-container .product-img{
     width: 100%;
-    aspect-ratio: 1.5 / 1;
-    object-fit: cover;
-}
-.product-content{
+    height: 220px; /* Fixed height for consistency */
+    overflow: hidden;
+  }
+  
+  .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    transition: transform 0.3s ease;
+  }
+  
+  .product-img-container:hover .product-img {
+    transform: scale(1.03);
+  }
+  
+  /* Price Tag */
+  .price {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: #1c1c1c;
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 4px;
+  }
+  
+  /* Product Details Section */
+  .product-content {
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: .5em;
-}
-.product-content > *{
-    display: block;
-}
-.product-content .description{
-    line-height: 1.2;
-    height: 60px;
-    overflow: hidden;
-}
-.product-content .title{
-    font-size: 1.25rem;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+  
+  .title {
+    font-size: 1.2rem;
     font-weight: 600;
-    line-height: 1.1;
-    text-align: left;
-    height: 50px;
+    height: 56px;
+    color: #333;
+    margin-bottom: 0.5rem;
     overflow: hidden;
-}
-.product-btn{
-    border-radius: .1em;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    overflow: hidden;
+    height: 45px;
+    text-overflow: ellipsis;
+  }
+  
+  /* Add to Cart Button */
+  .product-btn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #1c1c1c;
     border: none;
+    border-radius: 6px;
+    text-align: center;
     cursor: pointer;
-    color: #141414;
-    background-color: #dcdcdc;
-    font-size: 1.1rem;
-    line-height: 1.2;
-    padding: .2em 1em;
-    margin: 0 auto .5em auto;
-    position: relative;
-    transform: translateX(-50%);
-    left: 50%;
-    transition: all ease-in 200ms;
-}
-.product-btn.selected{
-    color: #f4f4f4;
-    background-color: #141414;
-}
-.product-btn:hover{
-    color: #f4f4f4;
-    background-color: #141414;
-}
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+  
+  .product-btn:hover {
+    background-color: #333;
+  }
+  
+  .product-btn.selected {
+    background-color: #d32f2f;
+  }
+  
+  .product-btn.selected:hover {
+    background-color: #c62828;
+  }
+  

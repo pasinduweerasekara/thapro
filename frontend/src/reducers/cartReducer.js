@@ -8,12 +8,12 @@ export function cartReducer(cart, action) {
           // Return a new array with the updated quantity for the found item
           return cart.map(item =>
             item.id === action.product.id
-              ? { ...item, quantity: item.quantity + 1 } // Return a new object with updated quantity
+              ? { ...item, quantity: item.quantity + action.quantity } // Return a new object with updated quantity
               : item // Return the original item
           );
         } else {
           // Return a new array with the new item added
-          return [...cart, { ...action.product, quantity: 1 }];
+          return [...cart, { ...action.product, quantity: action.quantity }];
         }
   
       case "REMOVE_ITEM":

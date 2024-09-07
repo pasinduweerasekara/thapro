@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, {useContext, useState } from 'react';
 import './productpage.css';
+import { ScrollRestoration, useParams } from 'react-router-dom';
+import { ProductContext } from '../../context/ProductsProvider';
+import { cartContext } from '../../context/CartContextProvider';
+
+
 
 const ProductPage = () => {
     const [currentImage, setCurrentImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
+    const { dispatch } = useContext(cartContext);
+
+    // for testing
+const {id} = useParams()
+const productsSet =useContext(ProductContext)
+const product = productsSet.filter((product)=> id===product.id)[0]
+// for testing
 
     const productImages = [
-        'https://picsum.photos/id/1018/1200/800',
+        product.cardImg,
         'https://picsum.photos/id/1025/1200/800',
         'https://picsum.photos/id/1043/1200/800',
         'https://picsum.photos/id/1060/1200/800'
@@ -15,9 +27,19 @@ const ProductPage = () => {
     // Handle increment and decrement of quantity
     const incrementQuantity = () => setQuantity(quantity + 1);
     const decrementQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
+    const handleAddToCart = ()  =>{
+      console.log(product);
+      
+      dispatch({
+        type:'ADD_TO_CART',
+        product: product,
+        quantity: quantity,
+      })
+    }
 
     return (
         <div className="product-container">
+          <ScrollRestoration/>
             <div className="product-image-section">
                 <div className="carousel">
                     <button className="carousel-control prev" onClick={() => setCurrentImage(currentImage === 0 ? productImages.length - 1 : currentImage - 1)}>
@@ -56,7 +78,7 @@ const ProductPage = () => {
 
                 <div className="product-actions">
                     <button className="purchase-button">Purchase Now</button>
-                    <button className="add-to-cart-button">Add to Cart</button>
+                    <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
                 </div>
             </div>
         </div>

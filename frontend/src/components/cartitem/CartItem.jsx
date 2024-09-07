@@ -34,7 +34,7 @@ useEffect(() => {
       </div>
       </div>
       <div className="cart-item-price" onClick={()=>{}}>
-        <span className="price">LKR: {parseFloat(totalPrice).toFixed(2)}</span>
+        <span className="item-total-price">LKR: {parseFloat(totalPrice).toFixed(2)}</span>
       </div>
       <button className="cart-item-delete-btn" onClick={()=>dispatch({type:'REMOVE_ITEM',productId:item.id})}>
         <MdClose />
