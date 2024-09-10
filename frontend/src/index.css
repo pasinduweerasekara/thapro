@@ -9,7 +9,10 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: "Titillium Web", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 span.devider{
   display: block;
   width: 90%;

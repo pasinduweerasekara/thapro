@@ -1,13 +1,14 @@
 import React, { Suspense, lazy } from 'react'
 import './products.css'
-import { Outlet, ScrollRestoration } from 'react-router-dom'
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import Spinner from '../../components/spinner/Spinner';
+import All from '../all/All';
 
 // Lazy load the components
 const Filter = lazy(() => import('../../components/filter/Filter'));
 const PageHero = lazy(() => import('../../components/pagehero/PageHero'));
-
 const Products = () => {
+  const location = useLocation()
   return (
     <div>
       <ScrollRestoration />
@@ -16,6 +17,9 @@ const Products = () => {
       <div id="page-content">
         <Suspense fallback={<Spinner/>}>
           <Filter />
+          {
+            location.pathname === "/products" ? <All/>:""
+          }
         </Suspense>
         <Outlet />
       </div>

@@ -64,11 +64,10 @@ const product = productsSet.filter((product)=> id===product.id)[0]
             </div>
 
             <div className="product-details-section">
-                <h1 className="product-title">Premium Product</h1>
-                <p className="product-price">$129.99</p>
+                <h1 className="product-title">{product.title}</h1>
+                <p className="product-price">LKR {parseFloat(product.price).toFixed(2)}</p>
                 <p className="product-description">
-                    Experience luxury and quality with this premium product. Designed with the finest materials, it offers both functionality and style.
-                </p>
+                    {product.description}</p>
 
                 <div className="quantity-setter">
                     <button className="quantity-button" onClick={decrementQuantity}>-</button>
