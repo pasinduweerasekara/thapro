@@ -1,0 +1,106 @@
+/* Shopify-inspired Card Container */
+.product-card {
+    width: 300px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    cursor: pointer;
+    border: 1px solid #e5e5e5;
+  }
+  
+  .product-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 20px;
+    transform: scale(1.02);
+  }
+  
+  /* Image Section with Consistent Dimensions */
+  .product-img-container {
+    position: relative;
+    width: 100%;
+    height: 220px; /* Fixed height for consistency */
+    overflow: hidden;
+  }
+  
+  .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    transition: transform 0.3s ease;
+  }
+  
+  .product-img-container:hover .product-img {
+    transform: scale(1.03);
+  }
+  
+  /* Price Tag */
+  .price {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: #1c1c1c;
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 4px;
+  }
+  
+  /* Product Details Section */
+  .product-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+  
+  .title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    height: 56px;
+    color: #333;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    overflow: hidden;
+    height: 45px;
+    text-overflow: ellipsis;
+  }
+  
+  /* Add to Cart Button */
+  .product-btn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #1c1c1c;
+    border: none;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+  
+  .product-btn:hover {
+    background-color: #333;
+  }
+  
+  .product-btn.selected {
+    background-color: #d32f2f;
+  }
+  
+  .product-btn.selected:hover {
+    background-color: #c62828;
+  }
+  

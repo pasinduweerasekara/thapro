@@ -1,0 +1,92 @@
+{
+    "productsSet": [
+        {
+          "id": "product1",
+          "for": "men",
+          "category": "accessory",
+          "feature": "feature1",
+          "title": "Crock Print Brown Card Holder (Veg Tan)",
+          "description":
+            "This card holder is made from high-quality vegetable-tanned leather with a crock print design.",
+          "price": 4500,
+          "cardImg:": "/src/assets/1.jpg"
+        },
+        {
+          "id": "product2",
+          "for": "women",
+          "category": "wallet",
+          "feature": "feature3",
+          "title": "Black Leather Bifold Wallet (Veg Tan)",
+          "description":
+            "A sleek and stylish bifold wallet made from vegetable-tanned black leather.",
+          "price": 6250,
+          "cardImg:": "/src/assets/2.jpg"
+        },
+        {
+          "id": "product4",
+          "for": "men",
+          "feature": "feature3",
+          "category": "cardholder",
+          "title": "Croc Print Card Holder (Veg Tan)",
+          "description":
+            "A compact and elegant card holder with a crocodile print, perfect for any occasion.",
+          "price": 3200,
+          "cardImg:": "/src/assets/3.jpg"
+        },
+        {
+          "id": "product5",
+          "feature": "feature1",
+          "category": "belt",
+          "for": "unisex",
+          "title": "Green Wallet (Veg Tan)",
+          "description":
+            "A durable and stylish green wallet made from vegetable-tanned leather.",
+          "price": 4500,
+          "cardImg:": "/src/assets/4.jpg"
+        },
+        {
+          "id": "product7",
+          "feature": "feature3",
+          "category": "wallet",
+          "for": "unisex",
+          "title": "Black Leather Bifold Wallet (Veg Tan)",
+          "description":
+            "A versatile bifold wallet that combines functionality with classic style.",
+          "price": 6250,
+          "cardImg:": "/src/assets/5.jpg"
+        },
+        {
+          "id": "product8",
+          "feature": "feature2",
+          "for": "women",
+          "category": "bifoldwallet",
+          "title": "Croc Print Card Holder (Veg Tan)",
+          "description":
+            "An elegant card holder featuring a croc print design, perfect for the modern woman.",
+          "price": 4500,
+          "cardImg:": "/src/assets/1.jpg"
+        },
+        {
+          "id": "product9",
+          "feature": "feature3",
+          "category": "cardholder",
+          "for": "women",
+          "title": "Green Wallet (Veg Tan)",
+          "description":
+            "A sophisticated wallet with a rich green color, made from vegetable-tanned leather.",
+          "price": 3200,
+          "cardImg:":"/src/assets/2.jpg"
+        },
+        {
+          "id": "product10.00",
+          "feature": "feature1",
+          "category": "wallet",
+          "for": "men",
+          "title": "Black Leather Bifold Wallet (Veg Tan)",
+          "description":
+            "A classic bifold wallet crafted from vegetable-tanned black leather, perfect for men.",
+          "price": 4500,
+          "cardImg:":"/src/assets/4.jpg"
+        }
+      ]
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './productgallery.css'; // Import your CSS file if needed
-import ProductCard from '../productcard/productcard';
+import Card from '../card/Card';
 
 const ProductGallery = ({ productsSet }) => {
   const [currentFeature, setCurrentFeature] = useState('all');
@@ -41,21 +41,23 @@ const ProductGallery = ({ productsSet }) => {
 
   return (
     <div id="product-container">
-      <h1 className="product-header">Featured Products</h1>
-      <div className='product-gallery-btns'>
+      {/* <div className='product-gallery-btns'>
       <button onClick={() => handleButtonClick('all')} id="button1" className={selectedBtn=="all"?"product-container-btn selected":"product-container-btn"}>ALL</button>
       <button onClick={() => handleButtonClick('feature1')} id="button2" className={selectedBtn=="feature1"?"product-container-btn selected":"product-container-btn"}>FEATURE 1</button>
       <button onClick={() => handleButtonClick('feature2')} id="button3" className={selectedBtn=="feature2"?"product-container-btn selected":"product-container-btn"}>FEATURE 2</button>
       <button onClick={() => handleButtonClick('feature3')} id="button4" className={selectedBtn=="feature3"?"product-container-btn selected":"product-container-btn"}>FEATURE 3</button>
-      </div>
+      </div> */}
       <div className="product-internal-container" id="internal-container-id">
+        
         {
-                (products.length!=0)?
-                    products.map(product => (<ProductCard key={product.id} product={product} title={product.title} description={product.description} price={product.price} cardImg={product.cardImg}/>))
-                :
-                    <div  className="product show" id="">
-                          <p>Empty</p>
-                        </div>
+          
+          (products.length!=0)?
+          products.map(product => (<Card product={product} key={product.id}/>))
+      :
+          <div  className="product show" id="">
+                <p>Empty</p>
+              </div>
+
         }
         
       </div>

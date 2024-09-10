@@ -1,0 +1,115 @@
+.cart-img-container{
+    width: 75px;
+    height: 75px;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+.cart-img-container .cart-img{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+.cart-item{
+    
+    background-color: #fafafa;
+    padding: 0 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.cart-item-description-container{
+    display: flex;
+    width: 75%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.cart-item-description{
+    width: 70%;
+    margin-right: auto;
+}
+.cart-item-title{
+    font-weight: 600;
+}
+.singlePrice{
+    display: block;
+}
+.cart-item-price{
+    width: 20%;
+}
+.cart-item-price .item-total-price{
+    font-weight: 600;
+}
+.car-item-counter-container{
+    height: 1.5rem;
+    width: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+.car-item-counter-container .car-item-counter-btn{
+    border-radius: .1rem;
+    background-color: white;
+    border: none;
+    font-weight: 600;
+    height: 100%;
+    padding: 0em .5em;
+    transition: background-color 200ms ease,
+                color 200ms ease-in;
+}
+.car-item-counter-container .car-item-counter-btn:hover{
+    color: #f3f3f3;
+    background-color: #1c1c1c;
+}
+.car-item-counter-container input{
+    width: 20px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    outline-width: 0;
+}
+
+.car-item-counter-container input::-webkit-outer-spin-button,
+.car-item-counter-container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.car-item-counter-container{
+    border: 1px solid #555555;
+}
+.car-item-counter-container input[type=number]{
+    -moz-appearance: textfield;
+}
+.cart-item-delete-btn{
+    border-radius: .2rem;
+    background-color: white;
+    border: none;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    font-weight: 600;
+    padding: 0em .5em;
+    transition: background-color 200ms ease,
+                color 200ms ease-in;
+}
+.cart-item-delete-btn:hover{
+    color: #f3f3f3;
+    background-color: #1c1c1c;
+}
+
+@media only screen and (max-width: 600px) {
+    .cart-img-container{
+        height: 100%;
+        aspect-ratio: 1 / 1.75;
+    }
+    .cart-item-description-container{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .cart-img-container .cart-img{
+        height: 100%;
+        object-fit: cover;
+    }
+}

@@ -1,0 +1,11 @@
+#content{
+    display: flex;
+}
+#content-header{
+    border: 2px solid green;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: thistle;
+    z-index: 99;
+}
