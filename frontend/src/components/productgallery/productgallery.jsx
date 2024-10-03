@@ -52,7 +52,7 @@ const ProductGallery = ({ productsSet }) => {
         {
           
           (products.length!=0)?
-          products.map(product => (<Card product={product} key={product.id}/>))
+          products.map(product => (<Card product={product} key={product._id}/>))
       :
           <div  className="product show" id="">
                 <p>Empty</p>

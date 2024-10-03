@@ -14,15 +14,10 @@ const ProductPage = () => {
     // for testing
 const {id} = useParams()
 const productsSet =useContext(ProductContext)
-const product = productsSet.filter((product)=> id===product.id)[0]
+const product = productsSet.filter((product)=> id===product.slug)[0]
 // for testing
 
-    const productImages = [
-        product.cardImg,
-        'https://picsum.photos/id/1025/1200/800',
-        'https://picsum.photos/id/1043/1200/800',
-        'https://picsum.photos/id/1060/1200/800'
-    ];
+    const productImages = product.images
 
     // Handle increment and decrement of quantity
     const incrementQuantity = () => setQuantity(quantity + 1);

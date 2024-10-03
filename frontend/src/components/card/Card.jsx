@@ -19,17 +19,17 @@ const Card = ({ product }) => {
   };
 
   const handleClick = () => {
-    navigate(`/products/${product.category}/${product.id}`);
+    navigate(`/products/${product.category}/${product.slug}`);
   };
 
   return (
     <div className="product-card">
       <div className="product-img-container" onClick={handleClick}>
-        <img src={product.cardImg} alt="" className="product-img" />
+        <img src={product.images[0]} alt="" className="product-img" />
         <span className="price">LKR {parseFloat(product.price).toFixed(2)}</span>
       </div>
       <div className="product-content" onClick={handleClick}>
-        <span className="title">{product.title}</span>
+        <span className="title">{product.name}</span>
         <span className="description">{product.description}</span>
       </div>
       <button
