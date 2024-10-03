@@ -16,5 +16,5 @@ app.use("/api/products", require('./routes/productRoute'))
 app.use(errorHandler)
 
 app.listen(port,()=>{
-    console.log(`Server running on port ${port}`)
+    console.log(`Server running http://localhost:${port}`)
 })
