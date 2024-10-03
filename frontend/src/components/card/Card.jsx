@@ -11,7 +11,7 @@ const Card = ({ product }) => {
 
   const handleAddtoCart = () => {
     if (hasClicked) {
-      dispatch({ type: 'REMOVE_ITEM', productId: product.id });
+      dispatch({ type: 'REMOVE_ITEM', productId: product._id });
     } else {
       dispatch({ type: 'ADD_TO_CART', product: product, quantity:1 });
     }

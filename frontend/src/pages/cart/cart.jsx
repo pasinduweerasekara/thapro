@@ -23,7 +23,7 @@ const Cart = () => {
       <button className="shop-now-button" onClick={handleNavigateToProducts}>
         Shop Now
       </button>
-    </div>:cart.map(item =>(<CartItem key={item.id} item={item}/>))}
+    </div>:cart.map(item =>(<CartItem key={item._id} item={item}/>))}
     </div>
   )
 }

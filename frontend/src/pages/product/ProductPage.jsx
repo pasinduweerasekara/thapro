@@ -23,8 +23,6 @@ const product = productsSet.filter((product)=> id===product.slug)[0]
     const incrementQuantity = () => setQuantity(quantity + 1);
     const decrementQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
     const handleAddToCart = ()  =>{
-      console.log(product);
-      
       dispatch({
         type:'ADD_TO_CART',
         product: product,

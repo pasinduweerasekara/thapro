@@ -108,7 +108,7 @@ function App() {
           }
         />
         {
-          ["wallets","belts","accessories","men","women"].map((page)=>(
+          ["wallets","belts","accessories","men","women", "bags"].map((page)=>(
             <Route
             key={page}
           path={`/products/${page}/:id`}
