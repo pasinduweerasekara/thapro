@@ -15,9 +15,10 @@ const All = () => {
   const [productsSet, setProductsSet] = useState([]);
   const location = useLocation()
   const apiUrl = `http://localhost:3000/api${location.pathname}`
+  
   useEffect(() => {
     const provideData = async () => {
-      const products = await fetchProducts(apiUrl); // Pass the URL as an argument
+      const products = await fetchProducts(apiUrl,0,0); // Pass the URL as an argument
       setProductsSet(products); // Update the state with fetched products
     };
 

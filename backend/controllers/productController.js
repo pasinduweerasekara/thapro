@@ -2,23 +2,37 @@ const asyncHandler = require("express-async-handler");
 const Product = require("../models/productModel");
 const mongoose = require("mongoose");
 
-// @desc Get all products or products by category
+// @desc Get all products or products by category with pagination
 // @route GET /api/products or /api/products/:category
 // @access public
 const getProductsByCategory = asyncHandler(async (req, res) => {
   const { category } = req.params;
+  const query = req.query
+  console.log(query);
+  
   let products;
 
-  if (category === "all") {
-    products = await Product.find();
-  } else {
-    products = await Product.find({ category });
+  if(Object.keys(query).length===0){
+    if (category === "all") {
+      products = await Product.find();
+    } else {
+      products = await Product.find({ category });
+    }
+    if (products.length <1)
+      products = await Product.find({gender:category})
+  }else{
+    if (category === "all") {
+      products = await Product.find().skip(query.skip).limit(query.limit)
+    } else {
+      products = await Product.find({ category }).skip(query.skip).limit(query.limit)
+    }
+    if (products.length <1)
+      products = await Product.find({gender:category}).skip(query.skip).limit(query.limit)
   }
-  if (products.length <1)
-    products = await Product.find({gender:category})
 
   res.status(200).json(products);
 });
+
 
 // @desc Get single product by category and identifier (ID or slug)
 // @route GET /api/products/:category/:identifier
