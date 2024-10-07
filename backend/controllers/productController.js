@@ -8,7 +8,6 @@ const mongoose = require("mongoose");
 const getProductsByCategory = asyncHandler(async (req, res) => {
   const { category } = req.params;
   const query = req.query
-  console.log(query);
   
   let products;
 

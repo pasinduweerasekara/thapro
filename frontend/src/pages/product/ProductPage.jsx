@@ -71,7 +71,7 @@ const product = productsSet.filter((product)=> id===product.slug)[0]
 
                 <div className="product-actions">
                     {/* <button className="purchase-button">Purchase Now</button> */}
-                    <Payhere/>
+                    <button className="purchase-button">Purchase Now</button>
 
                     <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
                 </div>

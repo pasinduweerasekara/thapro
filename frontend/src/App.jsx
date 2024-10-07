@@ -8,6 +8,7 @@ import {
 import "./App.css";
 import Spinner from "./components/spinner/Spinner";
 import ProductPage from "./pages/product/ProductPage";
+import Checkout from "./pages/checkout/Checkout";
 
 // Lazy load components
 const Navbar = lazy(() => import("./components/navbar/navbar"));
@@ -125,6 +126,14 @@ function App() {
           element={
             <Suspense fallback={<Spinner />}>
               <About />
+            </Suspense>
+          }
+        />
+        <Route
+          path="checkout"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <Checkout />
             </Suspense>
           }
         />

@@ -29,7 +29,8 @@ exports.createPayment = async (req, res) => {
     res.status(201).json({
       success: true,
       message: 'Payment created successfully',
-      data: payment,
+      paymentId: payment._id,
+      hash: payment.hash
     });
   } catch (error) {
     // Handle errors and send a failure response
