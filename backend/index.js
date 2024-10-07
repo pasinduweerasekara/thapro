@@ -27,6 +27,7 @@ const port = process.env.PORT || 5000; // Default to 5000 if PORT is not defined
 app.use("/api/orders", require("./routes/orderRoute"))
 app.use("/api/products", require("./routes/productRoute"))
 app.use("/api/customer", require("./routes/customerRoute"))
+app.use("/api/payment", require("./routes/paymentRoute"))
 
 // Error handling middleware
 app.use(errorHandler);

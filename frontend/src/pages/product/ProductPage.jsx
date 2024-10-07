@@ -3,6 +3,7 @@ import './productpage.css';
 import { ScrollRestoration, useParams } from 'react-router-dom';
 import { ProductContext } from '../../context/ProductsProvider';
 import { cartContext } from '../../context/CartContextProvider';
+import Payhere from '../../components/payhere/payhere';
 
 
 
@@ -69,7 +70,9 @@ const product = productsSet.filter((product)=> id===product.slug)[0]
                 </div>
 
                 <div className="product-actions">
-                    <button className="purchase-button">Purchase Now</button>
+                    {/* <button className="purchase-button">Purchase Now</button> */}
+                    <Payhere/>
+
                     <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
                 </div>
             </div>
