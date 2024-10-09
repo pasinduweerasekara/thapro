@@ -2,7 +2,7 @@ const Payment = require('../models/paymentModel');
 
 // Controller to handle payment creation
 exports.createPayment = async (req, res) => {
-  const { amount, currency, customerName, customerEmail, userId } = req.body;
+  const { amount, currency, customerName, customerEmail, userId,order_id } = req.body;
 
   // Validate required fields
   if (!amount || !currency || !customerName || !customerEmail) {
@@ -15,6 +15,7 @@ exports.createPayment = async (req, res) => {
   try {
     // Create a new Payment instance
     const payment = new Payment({
+      order_id,
       amount,
       currency,
       customerName,

@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
+const Order = require('../models/orderModel')
 require('dotenv').config(); // To load environment variables
 
 const paymentSchema = new mongoose.Schema({
-  orderId: {
-    type: String,
-    default: function () {
-      return this._id.toString(); // Use MongoDB's ObjectId as orderId
-    },
+  order_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Order', // Refers to the Payment model
+    required: true,
   },
   amount: {
     type: Number,
@@ -58,6 +58,16 @@ paymentSchema.pre('save', function (next) {
   next(); // Proceed with the save
 });
 
-const Payment = mongoose.model('Payment', paymentSchema);
+// Pre-save hook to update the Order with payment ID
+paymentSchema.pre('save', async function (next) {
+  try {
+    // Update the order with the payment ID
+    await Order.findByIdAndUpdate(this.order_id, { payment: this._id });
 
-module.exports = Payment;
+    next(); // Proceed with the save
+  } catch (error) {
+    next(error); // Pass error to the next middleware if updating the order fails
+  }
+})
+
+module.exports = mongoose.model('Payment', paymentSchema);

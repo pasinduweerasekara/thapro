@@ -47,11 +47,11 @@ const orderSchema = new mongoose.Schema(
       enum: ["credit card", "payhere", "cash on delivery"],
       required: true,
     },
-    paymentResult: {
-      id: { type: String },
-      status: { type: String },
-      update_time: { type: String },
-      email_address: { type: String },
+    // Adding a reference to the Payment model
+    payment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Payment', // Refers to the Payment model
+      required: false, // Can be set later when the payment is processed
     },
     itemsPrice: {
       type: Number,

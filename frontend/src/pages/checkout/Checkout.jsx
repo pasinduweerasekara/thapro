@@ -1,26 +1,61 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
 import "./checkout.css";
+import { cartContext } from "../../context/CartContextProvider";
 
 const Checkout = () => {
+  const { cart } = useContext(cartContext);
+  const [shipping, setShipping] = useState(450.00);
   const [activePaymentMethod, setActivePaymentMethod] = useState(null);
 
+  // Calculate the total item price
+  const itemPrice = parseFloat(
+    cart.reduce((acc, product) => acc + product.price * product.quantity, 0)
+  );
+
+  // Map cart items for order submission
+  const cartItems = cart.map((item) => ({
+    product: item._id,
+    quantity: item.quantity,
+    price: item.price * item.quantity,
+  }));
+
+  // Calculate the total price including shipping
+  const totalPrice = parseFloat((itemPrice + shipping).toFixed(2));
+
+  // Toggle the selected payment method
   const togglePaymentMethod = (method) => {
     setActivePaymentMethod(method);
   };
 
-  // Sample products with thumbnail images
-  const products = [
-    {
-      name: "Product 1",
-      price: 50.00,
-      imageUrl: "https://via.placeholder.com/50" // Replace with your image URL
-    },
-    {
-      name: "Product 2",
-      price: 75.00,
-      imageUrl: "https://via.placeholder.com/50" // Replace with your image URL
-    }
-  ];
+  // Handle order submission
+  const handleProceed = () => {
+    axios
+      .post("http://localhost:3000/api/orders", {
+        customer: "65112f75a5b5b7a9e8d0c123",
+        guestEmail: "guest@example.com",
+        orderItems: cartItems,
+        shippingAddress: {
+          fullName: "John Doe",
+          addressLine1: "123 Main Street",
+          addressLine2: "Apartment 4B",
+          city: "New York",
+          postalCode: "10001",
+          country: "USA",
+        },
+        paymentMethod: activePaymentMethod,
+        itemsPrice: itemPrice,
+        shippingPrice: shipping,
+        taxPrice: 5,
+        totalPrice: totalPrice,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="checkout-container">
@@ -40,41 +75,56 @@ const Checkout = () => {
           <input type="text" placeholder="Postal Code" />
           <input type="text" placeholder="Country" />
 
-          {/* Payment Method with Highlighted Selection */}
+          {/* Payment Method Selection */}
           <div className="checkout-section">
             <h2>Payment Method</h2>
-            {/* Cash on Delivery Option */}
             <div
-              className={`payment-option ${activePaymentMethod === 'cod' ? 'active' : ''}`}
-              onClick={() => togglePaymentMethod('cod')}
+              className={`payment-option ${activePaymentMethod === "cod" ? "active" : ""}`}
+              onClick={() => togglePaymentMethod("cod")}
             >
               Cash on Delivery
             </div>
-            {/* Payhere Option */}
             <div
-              className={`payment-option ${activePaymentMethod === 'payhere' ? 'active' : ''}`}
-              onClick={() => togglePaymentMethod('payhere')}
+              className={`payment-option ${activePaymentMethod === "payhere" ? "active" : ""}`}
+              onClick={() => togglePaymentMethod("payhere")}
             >
               Payhere
             </div>
           </div>
 
-          <button className="btn-primary">Proceed</button>
+          <button className="btn-primary" onClick={handleProceed}>
+            Proceed
+          </button>
         </div>
 
         <div className="checkout-summary">
           <h2>Order Summary</h2>
-          {products.map((product, index) => (
+          {cart.map((product, index) => (
             <div className="summary-item" key={index}>
-              <img src={product.imageUrl} alt={product.name} className="thumbnail" />
+              <div className="thumbnail-container">
+                <img
+                  src={product.images[0]}
+                  alt={product.name}
+                  className="thumbnail"
+                />
+                <div className="quantity-bubble">{product.quantity}</div>
+              </div>
               <span>{product.name}</span>
-              <span>${product.price.toFixed(2)}</span>
+              <span>LKR: {(product.price * product.quantity).toFixed(2)}</span>
             </div>
           ))}
 
           <div className="summary-total">
+            <span>Price</span>
+            <span>LKR: {itemPrice.toFixed(2)}</span>
+          </div>
+          <div className="summary-total">
+            <span>Shipping</span>
+            <span>LKR: {shipping.toFixed(2)}</span>
+          </div>
+          <div className="summary-total">
             <span>Total</span>
-            <span>${products.reduce((acc, product) => acc + product.price, 0).toFixed(2)}</span>
+            <span>LKR: {totalPrice.toFixed(2)}</span>
           </div>
         </div>
       </div>

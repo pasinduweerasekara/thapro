@@ -57,6 +57,8 @@ const createOrder = asyncHandler(async (req, res) => {
     taxPrice,
     totalPrice,
   } = req.body;
+console.log(req.body);
+
 
   // Validate if there are order items and the required fields
   if (!orderItems || orderItems.length === 0) {
@@ -82,7 +84,7 @@ const createOrder = asyncHandler(async (req, res) => {
   });
 
   const createdOrder = await order.save();
-  res.status(201).json(createdOrder);
+  res.status(201).json(createdOrder._id);
 });
 
 // @desc Get order by ID

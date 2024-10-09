@@ -10,7 +10,6 @@
     object-fit: cover;
 }
 .cart-item{
-    
     background-color: #fafafa;
     padding: 0 1rem;
     display: flex;
@@ -19,7 +18,7 @@
     justify-content: space-evenly;
     width: 100%;
     max-width: 800px;
-    margin: 0 auto;
+    margin: .5em auto;
 }
 .cart-item-description-container{
     display: flex;
