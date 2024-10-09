@@ -42,9 +42,17 @@ const orderSchema = new mongoose.Schema(
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
     },
+    billingAddress: {
+      fullName: { type: String, required: true },
+      addressLine1: { type: String, required: true },
+      addressLine2: { type: String },
+      city: { type: String, required: true },
+      postalCode: { type: String, required: true },
+      country: { type: String, required: true },
+    },
     paymentMethod: {
       type: String,
-      enum: ["credit card", "payhere", "cash on delivery"],
+      enum: ["credit card", "payhere", "cod"],
       required: true,
     },
     // Adding a reference to the Payment model

@@ -49,6 +49,24 @@ body {
     border-radius: 5px;
 }
 
+/* Same Address Option */
+.same-address-option {
+    margin: 1rem 0;
+    position: relative;
+}
+
+.same-address-option input[type="checkbox"] {
+    position: absolute;
+    top: 7px;
+    margin-left: 1rem;
+    width: fit-content;
+}
+
+.same-address-option label {
+    width: fit-content;
+    font-size: 14px;
+}
+
 /* Payment Options */
 .payment-option {
     margin: 15px 0;

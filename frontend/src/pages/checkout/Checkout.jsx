@@ -6,7 +6,28 @@ import { cartContext } from "../../context/CartContextProvider";
 const Checkout = () => {
   const { cart } = useContext(cartContext);
   const [shipping, setShipping] = useState(450.00);
-  const [activePaymentMethod, setActivePaymentMethod] = useState(null);
+  const [activePaymentMethod, setActivePaymentMethod] = useState("cod");
+  const [useSameAddress, setUseSameAddress] = useState(true); // State for using the same address
+
+  // Shipping address state
+  const [shippingAddress, setShippingAddress] = useState({
+    fullName: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    postalCode: "",
+    country: "",
+  });
+
+  // Billing address state
+  const [billingAddress, setBillingAddress] = useState({
+    fullName: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    postalCode: "",
+    country: "",
+  });
 
   // Calculate the total item price
   const itemPrice = parseFloat(
@@ -26,36 +47,56 @@ const Checkout = () => {
   // Toggle the selected payment method
   const togglePaymentMethod = (method) => {
     setActivePaymentMethod(method);
+  }
+
+  // Handle form input changes
+  const handleShippingChange = (e) => {
+    const { name, value } = e.target;
+    setShippingAddress({ ...shippingAddress, [name]: value });
   };
 
-  // Handle order submission
-  const handleProceed = () => {
-    axios
-      .post("http://localhost:3000/api/orders", {
+  const handleBillingChange = (e) => {
+    const { name, value } = e.target;
+    setBillingAddress({ ...billingAddress, [name]: value });
+  }
+
+    // Handle order submission
+    const handleProceed = () => {
+      const finalBillingAddress = useSameAddress ? shippingAddress : billingAddress;
+      console.log({
         customer: "65112f75a5b5b7a9e8d0c123",
         guestEmail: "guest@example.com",
         orderItems: cartItems,
-        shippingAddress: {
-          fullName: "John Doe",
-          addressLine1: "123 Main Street",
-          addressLine2: "Apartment 4B",
-          city: "New York",
-          postalCode: "10001",
-          country: "USA",
-        },
+        shippingAddress: shippingAddress,
+        billingAddress: finalBillingAddress,
         paymentMethod: activePaymentMethod,
         itemsPrice: itemPrice,
         shippingPrice: shipping,
         taxPrice: 5,
         totalPrice: totalPrice,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
       });
-  };
+      
+  
+      axios
+        .post("http://localhost:3000/api/orders", {
+          customer: "65112f75a5b5b7a9e8d0c123",
+          guestEmail: "guest@example.com",
+          orderItems: cartItems,
+          shippingAddress: shippingAddress,
+          billingAddress: finalBillingAddress,
+          paymentMethod: activePaymentMethod,
+          itemsPrice: itemPrice,
+          shippingPrice: shipping,
+          taxPrice: 5,
+          totalPrice: totalPrice,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
 
   return (
     <div className="checkout-container">
@@ -69,11 +110,36 @@ const Checkout = () => {
           <input type="email" placeholder="Email" />
 
           <h2>Shipping Address</h2>
-          <input type="text" placeholder="Full Name" />
-          <input type="text" placeholder="Address" />
-          <input type="text" placeholder="City" />
-          <input type="text" placeholder="Postal Code" />
-          <input type="text" placeholder="Country" />
+          <input type="text" name="fullName" placeholder="Full Name" onChange={handleShippingChange} />
+          <input type="text" name="addressLine1" placeholder="Address Line 1" onChange={handleShippingChange} />
+          <input type="text" name="addressLine2" placeholder="Address Line 2" onChange={handleShippingChange} />
+          <input type="text" name="city" placeholder="City" onChange={handleShippingChange} />
+          <input type="text" name="postalCode" placeholder="Postal Code" onChange={handleShippingChange} />
+          <input type="text" name="country" placeholder="Country" onChange={handleShippingChange} />
+
+          {/* Option to use the same billing address */}
+          <div className="same-address-option">
+          <label htmlFor="checkbox">Same billing address as shipping</label>
+
+            <input
+              type="checkbox"
+              name="checkbox"
+              checked={useSameAddress}
+              onChange={() => setUseSameAddress(!useSameAddress)}
+            />
+          </div>
+
+          {!useSameAddress && (
+            <>
+              <h2>Billing Address</h2>
+              <input type="text" name="fullName" placeholder="Full Name" onChange={handleBillingChange} />
+              <input type="text" name="addressLine1" placeholder="Address" onChange={handleBillingChange} />
+              <input type="text" name="addressLine2" placeholder="Address" onChange={handleBillingChange} />
+              <input type="text" name="city" placeholder="City" onChange={handleBillingChange} />
+              <input type="text" name="postalCode" placeholder="Postal Code" onChange={handleBillingChange} />
+              <input type="text" name="country" placeholder="Country" onChange={handleBillingChange} />
+            </>
+          )}
 
           {/* Payment Method Selection */}
           <div className="checkout-section">
