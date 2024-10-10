@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const Payhere = () => {
-
+const Payhere = (props) => {
+  const [paymentHash, setPaymentHash] = useState('')
+  const {errors,cart,validateForm,tel1,tel2,email,shippingAddress,finalBillingAddress,itemPrice,shipping,taxPrice,totalPrice,toast} = props
+  
   // Define the payment object
   const payment = {
     "sandbox": true, // Use sandbox mode during testing
@@ -9,15 +12,15 @@ const Payhere = () => {
     "return_url": undefined, // Can be your redirect URL after payment
     "cancel_url": undefined, // Can be your redirect URL after cancel
     "notify_url": "http://sample.com/notify", // Your server's notification URL
-    "order_id": "ItemNo12345", // Unique order ID
+    "order_id": "orderId", // Unique order ID
     "items": "Door bell wireless", // Item description
-    "amount": "1000.00", // Payment amount
+    "amount": totalPrice, // Payment amount
     "currency": "LKR", // Currency type
-    "hash": "45D3CBA93E9F2189BD630ADFE19AA6DC", // Replace with generated hash from backend
+    "hash": paymentHash, // Replace with generated hash from backend
     "first_name": "Saman", 
     "last_name": "Perera",
-    "email": "samanp@gmail.com", 
-    "phone": "0771234567",
+    "email": email, 
+    "phone": tel1,
     "address": "No.1, Galle Road", 
     "city": "Colombo", 
     "country": "Sri Lanka",
@@ -61,12 +64,51 @@ const Payhere = () => {
 
   // Trigger payment
   const handlePayment = () => {
-    payhere.startPayment(payment); // Start payment when button is clicked
+    if (!validateForm()) return;
+    if (Object.keys(errors).length ===0) {
+      axios
+      .post("http://localhost:3000/api/orders", {
+        customer: "65112f75a5b5b7a9e8d0c123",
+        guestEmail: email, // Use email from state
+        orderItems: cart,
+        contactNumber1: tel1,
+        contactNumber2: tel2,
+        shippingAddress: shippingAddress,
+        billingAddress: finalBillingAddress,
+        paymentMethod: "payhere",
+        itemsPrice: itemPrice,
+        shippingPrice: shipping,
+        taxPrice: 5,
+        totalPrice: totalPrice,
+      })
+      .then((response) => {
+        const orderId = response.data._id; // Extract order_id
+        return axios.post("http://localhost:3000/api/payment/new", {
+          orderId: orderId,
+          customerName: shippingAddress.fullName,
+          amount: totalPrice,
+          currency: "LKR",
+          customerEmail: email,
+          paymentMethod: "payhere",
+        });
+      })
+      .then((paymentResponse) => {
+        const hash = paymentResponse.data.hash
+        console.log(hash)
+        setPaymentHash(hash)
+      })
+      .catch((error) => {
+        toast.error("Something went wrong. Please try again.");
+        console.error(error);
+      });
+      payhere.startPayment(payment)
+    }
+    // Start payment when button is clicked
   };
 
   return (
     <div>
-      <button type="submit" id="payhere-payment" className="purchase-button" onClick={handlePayment}>
+      <button type="submit" id="payhere-payment" className="btn-primary" onClick={handlePayment} >
         PayHere Pay
       </button>
     </div>

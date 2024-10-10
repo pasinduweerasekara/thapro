@@ -2,10 +2,11 @@ const Payment = require('../models/paymentModel');
 
 // Controller to handle payment creation
 exports.createPayment = async (req, res) => {
-  const { amount, currency, customerName, customerEmail, userId,order_id } = req.body;
+  const { amount, currency, customerName, customerEmail, userId,orderId,paymentMethod } = req.body;
+  
 
   // Validate required fields
-  if (!amount || !currency || !customerName || !customerEmail) {
+  if (!amount || !currency || !customerName || !customerEmail || !paymentMethod) {
     return res.status(400).json({
       success: false,
       message: 'All fields (amount, currency, customerName, customerEmail) are required',
@@ -15,11 +16,12 @@ exports.createPayment = async (req, res) => {
   try {
     // Create a new Payment instance
     const payment = new Payment({
-      order_id,
+      orderId,
       amount,
       currency,
       customerName,
       customerEmail,
+      paymentMethod,
       userId: userId || null, // Set userId to null if not provided (for unregistered users)
     });
 
@@ -33,6 +35,7 @@ exports.createPayment = async (req, res) => {
       paymentId: payment._id,
       hash: payment.hash
     });
+    
   } catch (error) {
     // Handle errors and send a failure response
     res.status(500).json({

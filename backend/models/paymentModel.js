@@ -4,13 +4,22 @@ const Order = require('../models/orderModel')
 require('dotenv').config(); // To load environment variables
 
 const paymentSchema = new mongoose.Schema({
-  order_id: {
+  orderId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Order', // Refers to the Payment model
     required: true,
   },
+  customerName: {
+    type: String,
+    required: true,
+  },
   amount: {
     type: Number,
+    required: true,
+  },
+  paymentMethod: {
+    type: String,
+    enum: ["credit card", "payhere", "cod"],
     required: true,
   },
   currency: {
@@ -21,10 +30,6 @@ const paymentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     default: null, // Null for unregistered users
-  },
-  customerName: {
-    type: String,
-    required: true,
   },
   customerEmail: {
     type: String,

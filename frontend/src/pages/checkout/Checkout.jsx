@@ -1,19 +1,20 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS
 import "./checkout.css";
 import { cartContext } from "../../context/CartContextProvider";
-import validator from 'validator';
-import { isValidPhoneNumber } from 'libphonenumber-js';
+import Payhere from "../../components/payhere/payhere";
+import validator from "validator";
+import { isValidPhoneNumber } from "libphonenumber-js";
 
 const Checkout = () => {
   const { cart } = useContext(cartContext);
-  const [shipping, setShipping] = useState(450.00);
+  const [shipping, setShipping] = useState(450.0);
   const [activePaymentMethod, setActivePaymentMethod] = useState("cod");
   const [useSameAddress, setUseSameAddress] = useState(true);
-
-  const [errors, setErrors] = useState({}); 
+  const [initiatePayment, setInitiatePayment] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const [shippingAddress, setShippingAddress] = useState({
     fullName: "",
@@ -40,7 +41,7 @@ const Checkout = () => {
   const itemPrice = parseFloat(
     cart.reduce((acc, product) => acc + product.price * product.quantity, 0)
   );
-  
+
   const cartItems = cart.map((item) => ({
     product: item._id,
     quantity: item.quantity,
@@ -79,21 +80,18 @@ const Checkout = () => {
     if (!tel1) {
       newErrors.tel1 = "Contact Number 1 is required";
       toast.error("Contact Number 1 is required");
-    } else if (!isValidPhoneNumber(tel1, 'LK')) {
+    } else if (!isValidPhoneNumber(tel1, "LK")) {
       newErrors.tel1 = "Invalid phone number 1";
       toast.error("Invalid phone number 1");
     }
 
     // Tel2 validation
-    console.log(tel2.length);
-    if(tel2.length>0){
-      
-      if(!isValidPhoneNumber(tel2, 'LK')) {
+    if (tel2.length > 0) {
+      if (!isValidPhoneNumber(tel2, "LK")) {
         newErrors.tel2 = "Invalid phone number 2";
         toast.error("Invalid phone number 2");
       }
     }
-    
 
     // Shipping address validation
     if (!shippingAddress.fullName) {
@@ -152,7 +150,9 @@ const Checkout = () => {
   };
 
   const handleProceed = () => {
-    const finalBillingAddress = useSameAddress ? shippingAddress : billingAddress;
+    const finalBillingAddress = useSameAddress
+      ? shippingAddress
+      : billingAddress;
 
     if (!validateForm()) return;
 
@@ -161,6 +161,8 @@ const Checkout = () => {
         customer: "65112f75a5b5b7a9e8d0c123",
         guestEmail: email, // Use email from state
         orderItems: cartItems,
+        contactNumber1: tel1,
+        contactNumber2: tel2,
         shippingAddress: shippingAddress,
         billingAddress: finalBillingAddress,
         paymentMethod: activePaymentMethod,
@@ -170,21 +172,32 @@ const Checkout = () => {
         totalPrice: totalPrice,
       })
       .then((response) => {
-        toast.success("Order placed successfully!");
+        const orderId = response.data._id; // Extract order_id
+
+        return axios.post("http://localhost:3000/api/payment/new", {
+          orderId: orderId,
+          customerName: shippingAddress.fullName,
+          amount: totalPrice,
+          currency: "LKR",
+          customerEmail: email,
+          paymentMethod: activePaymentMethod,
+        });
+      })
+      .then((paymentResponse) => {
+        toast.success("Payment initiated successfully!");
       })
       .catch((error) => {
-        toast.error("Order failed. Please try again.");
-        console.log(error);
+        toast.error("Something went wrong. Please try again.");
+        console.error(error);
       });
   };
 
   return (
     <div className="checkout-container">
-      <ToastContainer /> {/* Include the ToastContainer in your component */}
+      <ToastContainer />
       <div className="checkout-header">
         <h1>Checkout</h1>
       </div>
-
       <div className="checkout-content">
         <div className="checkout-form">
           <h2>Contact Information</h2>
@@ -201,10 +214,10 @@ const Checkout = () => {
             onChange={(e) => setTel1(e.target.value)} // Update tel1 state
           />
           <input
-          type="tel"
-          placeholder="Contact Number 2"
-          value={tel2}
-          onChange={(e) => setTel2(e.target.value)} // Update tel1 state
+            type="tel"
+            placeholder="Contact Number 2"
+            value={tel2}
+            onChange={(e) => setTel2(e.target.value)} // Update tel1 state
           />
 
           <h2>Shipping Address</h2>
@@ -310,10 +323,29 @@ const Checkout = () => {
               Payhere
             </div>
           </div>
-
-          <button className="btn-primary" onClick={handleProceed}>
-            Proceed
-          </button>
+          {activePaymentMethod === "cod" ? (
+            <button className="btn-primary" onClick={handleProceed}>
+              Proceed
+            </button>
+          ) : (
+            <Payhere
+              errors={errors}
+              cart={cartItems}
+              shippingAddress={shippingAddress}
+              toast={toast}
+              email={email}
+              tel1={tel1}
+              tel2={tel2}
+              totalPrice={totalPrice}
+              shipping={shipping}
+              taxPrice={5}
+              itemsPrice={itemPrice}
+              validateForm={validateForm}
+              finalBillingAddress={
+                useSameAddress ? shippingAddress : billingAddress
+              }
+            />
+          )}
         </div>
 
         <div className="checkout-summary">

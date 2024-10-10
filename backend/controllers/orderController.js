@@ -49,6 +49,8 @@ const createOrder = asyncHandler(async (req, res) => {
   const {
     customer,
     guestEmail,
+    contactNumber1,
+    contactNumber2,
     orderItems,
     shippingAddress,
     billingAddress,
@@ -58,7 +60,6 @@ const createOrder = asyncHandler(async (req, res) => {
     taxPrice,
     totalPrice,
   } = req.body;
-console.log(req.body);
 
 
   // Validate if there are order items and the required fields
@@ -75,6 +76,8 @@ console.log(req.body);
   const order = new Order({
     customer: customer || null,
     guestEmail: guestEmail || null,
+    contactNumber1:contactNumber1,
+    contactNumber2:contactNumber2 || contactNumber1,
     orderItems,
     shippingAddress,
     billingAddress,
@@ -86,8 +89,11 @@ console.log(req.body);
   });
 
   const createdOrder = await order.save();
-  res.status(201).json(createdOrder._id);
-});
+  res.status(201).json({
+    _id: createdOrder._id,
+    totalPrice: createdOrder.totalPrice
+  })
+})
 
 // @desc Get order by ID
 // @route GET /api/orders/:id

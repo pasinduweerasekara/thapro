@@ -16,6 +16,13 @@ const orderSchema = new mongoose.Schema(
         message: "Invalid email format",
       },
     },
+    contactNumber1:{
+      type:String,
+      required:true
+    },
+    contactNumber2:{
+      type:String,
+    },
     orderItems: [
       {
         product: {
