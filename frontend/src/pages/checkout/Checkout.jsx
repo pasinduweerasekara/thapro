@@ -125,6 +125,10 @@ const Checkout = () => {
         newErrors.billingAddressLine1 = "Address Line 1 is required";
         toast.error("Billing Address Line 1 is required");
       }
+      if (!billingAddress.addressLine2) {
+        newErrors.billingAddressLine2 = "Address Line 2 is required";
+        toast.error("Billing Address Line 2 is required");
+      }
       if (!billingAddress.city) {
         newErrors.billingCity = "City is required";
         toast.error("Billing City is required");
@@ -281,6 +285,12 @@ const Checkout = () => {
                 type="text"
                 name="addressLine1"
                 placeholder="Address Line 1"
+                onChange={handleBillingChange}
+              />
+              <input
+                type="text"
+                name="addressLine2"
+                placeholder="Address Line 2"
                 onChange={handleBillingChange}
               />
               <input

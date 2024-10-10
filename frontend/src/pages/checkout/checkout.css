@@ -69,12 +69,12 @@ body {
 
 /* Payment Options */
 .payment-option {
+    cursor: pointer;
     margin: 15px 0;
     padding: 15px;
     background-color: #f7f7f7; /* Light background for payment options */
     border: 1px solid #e1e1e1; /* Light border for payment options */
     border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Change cursor to pointer */
     transition: background-color 0.3s; /* Smooth hover effect */
 }
 
@@ -177,7 +177,7 @@ body {
     }
 
     .summary-item {
-        flex-direction: column; /* Stack image and text */
+        flex-direction: row; /* Stack image and text */
         align-items: flex-start; /* Align items to the start */
     }
 

@@ -1,4 +1,5 @@
 import React, {useContext, useState } from 'react';
+import { ToastContainer, toast } from "react-toastify";
 import './productpage.css';
 import { ScrollRestoration, useParams } from 'react-router-dom';
 import { ProductContext } from '../../context/ProductsProvider';
@@ -29,11 +30,13 @@ const product = productsSet.filter((product)=> id===product.slug)[0]
         product: product,
         quantity: quantity,
       })
+      toast.success("Item added successfully!")
     }
 
     return (
         <div className="product-container">
           <ScrollRestoration/>
+          <ToastContainer/>
             <div className="product-image-section">
                 <div className="carousel">
                     <button className="carousel-control prev" onClick={() => setCurrentImage(currentImage === 0 ? productImages.length - 1 : currentImage - 1)}>
