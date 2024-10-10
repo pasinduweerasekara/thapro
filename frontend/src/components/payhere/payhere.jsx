@@ -5,6 +5,8 @@ const Payhere = (props) => {
   const [paymentHash, setPaymentHash] = useState('')
   const {errors,cart,validateForm,tel1,tel2,email,shippingAddress,finalBillingAddress,itemPrice,shipping,taxPrice,totalPrice,toast} = props
   
+  
+  
   // Define the payment object
   const payment = {
     "sandbox": true, // Use sandbox mode during testing
@@ -17,16 +19,16 @@ const Payhere = (props) => {
     "amount": totalPrice, // Payment amount
     "currency": "LKR", // Currency type
     "hash": paymentHash, // Replace with generated hash from backend
-    "first_name": "Saman", 
-    "last_name": "Perera",
+    "first_name": shippingAddress.fullName.split(' ')[0], 
+    "last_name": shippingAddress.fullName.split(' ').slice(-1),
     "email": email, 
     "phone": tel1,
-    "address": "No.1, Galle Road", 
-    "city": "Colombo", 
-    "country": "Sri Lanka",
-    "delivery_address": "No. 46, Galle road, Kalutara South", 
-    "delivery_city": "Kalutara",
-    "delivery_country": "Sri Lanka",
+    "address": finalBillingAddress.addressLine1+", "+finalBillingAddress.addressLine2, 
+    "city": finalBillingAddress.city, 
+    "country": finalBillingAddress.country,
+    "delivery_address": shippingAddress.addressLine1+", "+shippingAddress.addressLine2, 
+    "delivery_city": shippingAddress.city,
+    "delivery_country": shippingAddress.country,
     "custom_1": "", 
     "custom_2": ""
   };
@@ -64,7 +66,9 @@ const Payhere = (props) => {
 
   // Trigger payment
   const handlePayment = () => {
+    
     if (!validateForm()) return;
+
     if (Object.keys(errors).length ===0) {
       axios
       .post("http://localhost:3000/api/orders", {
@@ -94,7 +98,6 @@ const Payhere = (props) => {
       })
       .then((paymentResponse) => {
         const hash = paymentResponse.data.hash
-        console.log(hash)
         setPaymentHash(hash)
       })
       .catch((error) => {
