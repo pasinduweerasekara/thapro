@@ -7,14 +7,15 @@ import { cartContext } from "../../context/CartContextProvider";
 import Payhere from "../../components/payhere/payhere";
 import validator from "validator";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import saveOrderAndPayment from "../../helpers/saveOrderAndPayment";
 
 const Checkout = () => {
   const { cart } = useContext(cartContext);
   const [shipping, setShipping] = useState(450.0);
   const [activePaymentMethod, setActivePaymentMethod] = useState("cod");
   const [useSameAddress, setUseSameAddress] = useState(true);
-  const [initiatePayment, setInitiatePayment] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const [shippingAddress, setShippingAddress] = useState({
     fullName: "",
@@ -153,48 +154,32 @@ const Checkout = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleProceed = () => {
+  const handleProceed = async() => {
     const finalBillingAddress = useSameAddress
       ? shippingAddress
       : billingAddress;
 
     if (!validateForm()) return;
 
-    axios
-      .post("http://localhost:3000/api/orders", {
-        customer: "65112f75a5b5b7a9e8d0c123",
-        guestEmail: email, // Use email from state
-        orderItems: cartItems,
-        contactNumber1: tel1,
-        contactNumber2: tel2,
-        shippingAddress: shippingAddress,
-        billingAddress: finalBillingAddress,
-        paymentMethod: activePaymentMethod,
-        itemsPrice: itemPrice,
-        shippingPrice: shipping,
-        taxPrice: 5,
-        totalPrice: totalPrice,
-      })
-      .then((response) => {
-        const orderId = response.data._id; // Extract order_id
-
-        return axios.post("http://localhost:3000/api/payment/new", {
-          orderId: orderId,
-          customerName: shippingAddress.fullName,
-          amount: totalPrice,
-          currency: "LKR",
-          customerEmail: email,
-          paymentMethod: activePaymentMethod,
-        });
-      })
-      .then((paymentResponse) => {
-        toast.success("Payment initiated successfully!");
-      })
-      .catch((error) => {
-        toast.error("Something went wrong. Please try again.");
-        console.error(error);
-      });
+    const response = await saveOrderAndPayment(
+      "65112f75a5b5b7a9e8d0c123",
+      cartItems,
+      shippingAddress,
+      email,
+      tel1,
+      tel2,
+      activePaymentMethod,
+      totalPrice,
+      shipping,
+      5,
+      itemPrice,
+      finalBillingAddress)
+      setIsSuccess(response)
+      if (isSuccess) {
+        toast.success("Order Placed")
+      }
   };
+  
 
   return (
     <div className="checkout-container">

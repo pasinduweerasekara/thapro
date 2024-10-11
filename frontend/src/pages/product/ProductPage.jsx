@@ -4,7 +4,6 @@ import './productpage.css';
 import { ScrollRestoration, useParams } from 'react-router-dom';
 import { ProductContext } from '../../context/ProductsProvider';
 import { cartContext } from '../../context/CartContextProvider';
-import Payhere from '../../components/payhere/payhere';
 
 
 
