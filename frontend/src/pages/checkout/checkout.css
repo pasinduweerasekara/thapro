@@ -1,15 +1,3 @@
-/* Global Styles */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-}
-
 /* Checkout Container */
 .checkout-container {
     max-width: 1200px;
@@ -155,13 +143,18 @@ body {
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #555555;
 }
 
+/* Spinner CSS */
+.icon-loading{
+    font-size: 16px;
+}
+  
 @media (max-width: 768px) {
     .checkout-content {
         flex-direction: column-reverse; /* Stack elements vertically */
@@ -187,8 +180,13 @@ body {
     }
 
     .btn-primary {
-        padding: 10px; /* Reduce button padding on small screens */
+        height: 3rem;
+        padding: 12px; /* Reduce button padding on small screens */
         font-size: 14px; /* Smaller font size for button */
+    }
+
+    .btn-primary >span{
+        padding: .5em;
     }
 
     .checkout-header h1 {

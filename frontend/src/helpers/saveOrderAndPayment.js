@@ -31,7 +31,7 @@ export default async function saveOrderAndPayment(
     });
     const orderId = orderResponse.data._id;
 
-    axios.post(
+    const paymentResponse = await axios.post(
       "http://localhost:3000/api/payment/new",
       {
         orderId: orderId,
@@ -42,7 +42,7 @@ export default async function saveOrderAndPayment(
         paymentMethod: activePaymentMethod,
       }
     );
-    return true;
+    return paymentResponse.data.hash
   } catch {
     (error) => {
       if (error.response) {

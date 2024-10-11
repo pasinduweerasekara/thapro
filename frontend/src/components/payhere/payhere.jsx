@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import saveOrderAndPayment from '../../helpers/saveOrderAndPayment';
 
 const Payhere = (props) => {
   const [paymentHash, setPaymentHash] = useState('')
-  const {errors,cart,validateForm,tel1,tel2,email,shippingAddress,finalBillingAddress,itemPrice,shipping,taxPrice,totalPrice,toast} = props
+  const {errors,cart,validateForm,tel1,tel2,email,shippingAddress,finalBillingAddress,itemPrice,shipping,taxPrice,totalPrice,toast,setPaymentStart} = props
   
   
   
@@ -48,7 +49,7 @@ const Payhere = (props) => {
       };
 
       payhere.onDismissed = function () {
-        console.log("Payment dismissed");
+        toast.warn("Payment Cancelled")
         // Handle when the payment window is closed without completing
       };
 
@@ -65,45 +66,31 @@ const Payhere = (props) => {
   }, []);
 
   // Trigger payment
-  const handlePayment = () => {
+  const handlePayment = async () => {
+    setPaymentStart(true)
     
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      setPaymentStart(false)
+      return}
 
-    if (Object.keys(errors).length ===0) {
-      axios
-      .post("http://localhost:3000/api/orders", {
-        customer: "65112f75a5b5b7a9e8d0c123",
-        guestEmail: email, // Use email from state
-        orderItems: cart,
-        contactNumber1: tel1,
-        contactNumber2: tel2,
-        shippingAddress: shippingAddress,
-        billingAddress: finalBillingAddress,
-        paymentMethod: "payhere",
-        itemsPrice: itemPrice,
-        shippingPrice: shipping,
-        taxPrice: 5,
-        totalPrice: totalPrice,
-      })
-      .then((response) => {
-        const orderId = response.data._id; // Extract order_id
-        return axios.post("http://localhost:3000/api/payment/new", {
-          orderId: orderId,
-          customerName: shippingAddress.fullName,
-          amount: totalPrice,
-          currency: "LKR",
-          customerEmail: email,
-          paymentMethod: "payhere",
-        });
-      })
-      .then((paymentResponse) => {
-        const hash = paymentResponse.data.hash
-        setPaymentHash(hash)
-      })
-      .catch((error) => {
-        toast.error("Something went wrong. Please try again.");
-        console.error(error);
-      });
+    if (Object.keys(errors).length ===0) { 
+      const response = await saveOrderAndPayment(
+        "65112f75a5b5b7a9e8d0c123",
+        cart,
+        shippingAddress,
+        email,
+        tel1,
+        tel2,
+        'payhere',
+        totalPrice,
+        shipping,
+        5,
+        itemPrice,
+        finalBillingAddress)
+        setPaymentHash(response)
+        if (response) {
+          toast.success("Order Saved!")
+        }
       payhere.startPayment(payment)
     }
     // Start payment when button is clicked

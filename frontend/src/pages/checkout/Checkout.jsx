@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import the CSS
 import "./checkout.css";
+import {TailSpin} from 'react-loading-icons'
 import { cartContext } from "../../context/CartContextProvider";
 import Payhere from "../../components/payhere/payhere";
 import validator from "validator";
@@ -15,7 +16,8 @@ const Checkout = () => {
   const [activePaymentMethod, setActivePaymentMethod] = useState("cod");
   const [useSameAddress, setUseSameAddress] = useState(true);
   const [errors, setErrors] = useState({});
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [paymentStart,setPaymentStart] = useState(false)
+  const [paymentHash, setpaymentHash] = useState('')
 
   const [shippingAddress, setShippingAddress] = useState({
     fullName: "",
@@ -52,6 +54,7 @@ const Checkout = () => {
   const totalPrice = parseFloat((itemPrice + shipping).toFixed(2));
 
   const togglePaymentMethod = (method) => {
+    setPaymentStart(false)
     setActivePaymentMethod(method);
   };
 
@@ -155,11 +158,14 @@ const Checkout = () => {
   };
 
   const handleProceed = async() => {
+    setPaymentStart(true)
     const finalBillingAddress = useSameAddress
       ? shippingAddress
       : billingAddress;
 
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      setPaymentStart(false)
+      return};
 
     const response = await saveOrderAndPayment(
       "65112f75a5b5b7a9e8d0c123",
@@ -174,8 +180,9 @@ const Checkout = () => {
       5,
       itemPrice,
       finalBillingAddress)
-      setIsSuccess(response)
-      if (isSuccess) {
+      setpaymentHash(response)
+      if (response) {
+        setPaymentStart(false)
         toast.success("Order Placed")
       }
   };
@@ -320,7 +327,7 @@ const Checkout = () => {
           </div>
           {activePaymentMethod === "cod" ? (
             <button className="btn-primary" onClick={handleProceed}>
-              Proceed
+              {paymentStart?<TailSpin height={24}/>:<span >Proceed</span>}
             </button>
           ) : (
             <Payhere
@@ -334,8 +341,9 @@ const Checkout = () => {
               totalPrice={totalPrice}
               shipping={shipping}
               taxPrice={5}
-              itemsPrice={itemPrice}
+              itemPrice={itemPrice}
               validateForm={validateForm}
+              setPaymentStart={setPaymentStart}
               finalBillingAddress={
                 useSameAddress ? shippingAddress : billingAddress
               }
