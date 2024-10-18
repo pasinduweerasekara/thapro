@@ -19,11 +19,11 @@ useEffect(() => {
   return (
     <div className="cart-item">
       <div className="cart-img-container">
-        <img src={item.cardImg} alt="" className="cart-img" />
+        <img src={item.images[0]} alt="" className="cart-img" />
       </div>
       <div className="cart-item-description-container">
       <div className="cart-item-description">
-        <span className="cart-item-title">{item.title}</span>
+        <span className="cart-item-title">{item.name}</span>
         <span className="singlePrice">LKR {parseFloat(item.price).toFixed(2)}</span>
         </div>
         <div className="car-item-counter-container">
@@ -36,7 +36,7 @@ useEffect(() => {
       <div className="cart-item-price" onClick={()=>{}}>
         <span className="item-total-price">LKR: {parseFloat(totalPrice).toFixed(2)}</span>
       </div>
-      <button className="cart-item-delete-btn" onClick={()=>dispatch({type:'REMOVE_ITEM',productId:item.id})}>
+      <button className="cart-item-delete-btn" onClick={()=>dispatch({type:'REMOVE_ITEM',productId:item._id})}>
         <MdClose />
       </button>
     </div>

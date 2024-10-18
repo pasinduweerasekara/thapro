@@ -1,15 +1,24 @@
-import PageHero from '../../components/pagehero/PageHero'
 import './belts.css'
-import bgImg from '../../assets/belts.jpg'
-import React, { useContext } from 'react'
+import React, {useEffect, useState } from 'react'
 import PageContent from '../../components/pagecontent/PageContent'
-import { ProductContext } from '../../context/ProductsProvider'
+import { fetchProducts } from '../../helpers/fetchProducts'
+import { useLocation } from 'react-router-dom'
 
 const Belts = () => {
-  const products = useContext(ProductContext)
+  const [productsSet, setProductsSet] = useState([]);
+  const location = useLocation()
+  const apiUrl = `http://localhost:3000/api${location.pathname}`
+  useEffect(() => {
+    const provideData = async () => {
+      const products = await fetchProducts(apiUrl); // Pass the URL as an argument
+      setProductsSet(products); // Update the state with fetched products
+    };
+
+    provideData(); // Fetch products when the component mounts
+  }, [apiUrl])
   return (
     <div id="belts-container">
-      <PageContent products={products} title="Belts"/>
+      <PageContent products={productsSet} title="Belts"/>
     </div>
   )
 }

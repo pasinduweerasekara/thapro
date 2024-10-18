@@ -1,0 +1,207 @@
+/* Checkout Container */
+.checkout-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Checkout Header */
+.checkout-header {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+/* Checkout Content */
+.checkout-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Checkout Form */
+.checkout-form {
+    width: 60%;
+}
+
+.checkout-form h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.checkout-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Same Address Option */
+.same-address-option {
+    margin: 1rem 0;
+    position: relative;
+}
+
+.same-address-option input[type="checkbox"] {
+    position: absolute;
+    top: 7px;
+    margin-left: 1rem;
+    width: fit-content;
+}
+
+.same-address-option label {
+    width: fit-content;
+    font-size: 14px;
+}
+
+/* Payment Options */
+.payment-option {
+    cursor: pointer;
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #f7f7f7; /* Light background for payment options */
+    border: 1px solid #e1e1e1; /* Light border for payment options */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+.payment-option:hover {
+    background-color: #e6e6e6; /* Darker background on hover */
+}
+
+/* Highlight active payment method */
+.payment-option.active {
+    background-color: #cce5ff; /* Light blue background for active method */
+    border-color: #004085; /* Darker border color for active method */
+    font-weight: bold; /* Bold text for active method */
+}
+
+/* Summary Section */
+.checkout-summary {
+    width: 35%;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+}
+
+.checkout-summary h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space between text and price */
+    padding: 10px 0;
+}
+
+.thumbnail {
+    width: 50px; /* Set the width of the thumbnail */
+    height: 50px; /* Set the height of the thumbnail */
+    border-radius: 5px; /* Optional: Rounded corners for the image */
+    margin-right: 10px; /* Space between the image and text */
+}
+
+.thumbnail-container {
+    position: relative; /* To position the bubble over the image */
+    display: inline-block;
+  }
+  
+  .quantity-bubble {
+    position: absolute;
+    top: -.5em;
+    right: 0;
+    background-color: #282828;
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+/* Button Styles */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #282828;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer !important;
+}
+
+.btn-primary:hover {
+    background-color: #555555;
+}
+
+/* Spinner CSS */
+.icon-loading{
+    font-size: 16px;
+}
+  
+@media (max-width: 768px) {
+    .checkout-content {
+        flex-direction: column-reverse; /* Stack elements vertically */
+    }
+
+    .checkout-form {
+        width: 100%; /* Full width on small screens */
+    }
+
+    .checkout-summary {
+        width: 100%; /* Full width on small screens */
+        margin-top: 20px; /* Add some space above summary */
+    }
+
+    .summary-item {
+        flex-direction: row; /* Stack image and text */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .thumbnail {
+        width: 40px; /* Smaller thumbnail on small screens */
+        height: 40px; /* Smaller thumbnail on small screens */
+    }
+
+    .btn-primary {
+        height: 3rem;
+        padding: 12px; /* Reduce button padding on small screens */
+        font-size: 14px; /* Smaller font size for button */
+    }
+
+    .btn-primary >span{
+        padding: .5em;
+    }
+
+    .checkout-header h1 {
+        font-size: 24px; /* Smaller font size for header */
+    }
+
+    .checkout-form h2 {
+        font-size: 16px; /* Smaller font size for section headers */
+    }
+
+    .checkout-summary h2 {
+        font-size: 16px; /* Smaller font size for summary header */
+    }
+
+    .summary-total {
+        padding-top: 15px; /* Adjust padding for total section */
+    }
+}

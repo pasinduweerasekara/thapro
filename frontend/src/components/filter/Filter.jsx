@@ -4,8 +4,6 @@ import './filter.css'
 import React from 'react'
 
 function Filter() {
-    console.log("Filter rendered");
-    
   return (
     <div id='filter-container'>
         <div id='filter-content'>

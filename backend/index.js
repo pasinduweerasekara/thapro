@@ -1,20 +1,38 @@
-const express = require('express')
-const errorHandler = require('./middlewares/errorHandler')
-const connectDb = require('./config/dbconnection')
-const dotenv = require('dotenv').config()
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv").config();
+const connectDb = require("./config/dbconnection");
+const errorHandler = require("./middlewares/errorHandler");
 
-connectDb()
-const app = express()
+// Connect to the database
+connectDb();
 
-// middlewares
-app.use(express.json())
+const app = express();
 
-const port = process.env.PORT
+// Middleware
+app.use(express.json()); // Parse JSON bodies
 
-app.use("/api/products", require('./routes/productRoute'))
+// CORS options
+const corsOptions = {
+  origin: "http://localhost:5173", // Frontend's domain
+  optionsSuccessStatus: 200, 
+};
 
-app.use(errorHandler)
+app.use(cors(corsOptions));
 
-app.listen(port,()=>{
-    console.log(`Server running on port ${port}`)
-})
+// Define the port
+const port = process.env.PORT || 5000; // Default to 5000 if PORT is not defined
+
+// Routes
+app.use("/api/orders", require("./routes/orderRoute"))
+app.use("/api/products", require("./routes/productRoute"))
+app.use("/api/customer", require("./routes/customerRoute"))
+app.use("/api/payment", require("./routes/paymentRoute"))
+
+// Error handling middleware
+app.use(errorHandler);
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});

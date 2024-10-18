@@ -1,10 +1,9 @@
-import React, { useContext, Suspense, lazy } from "react";
+import React, {Suspense, lazy, useState, useEffect } from "react";
 import "./all.css";
-import bgimg from "../../assets/3.jpg";
-import { ProductContext } from "../../context/ProductsProvider";
 import Spinner from "../../components/spinner/Spinner";
 import Sorter from "../../components/sorter/Sorter";
-import { ScrollRestoration } from "react-router-dom";
+import { fetchProducts } from "../../helpers/fetchProducts";
+import { useLocation } from "react-router-dom";
 
 // Lazy load components
 const PageHero = lazy(() => import("../../components/pagehero/PageHero"));
@@ -13,13 +12,24 @@ const PageContent = lazy(() =>
 );
 
 const All = () => {
-  const products = useContext(ProductContext);
+  const [productsSet, setProductsSet] = useState([]);
+  const location = useLocation()
+  const apiUrl = `http://localhost:3000/api${location.pathname}`
+  
+  useEffect(() => {
+    const provideData = async () => {
+      const products = await fetchProducts(apiUrl,0,0); // Pass the URL as an argument
+      setProductsSet(products); // Update the state with fetched products
+    };
 
+    provideData(); // Fetch products when the component mounts
+  }, [apiUrl])
+  
   return (
     <div>
       <Suspense fallback={<Spinner/>}>
       <Sorter/>
-      <PageContent products={products} title="All" />
+      <PageContent products={productsSet} title="All" />
       </Suspense>
     </div>
   );

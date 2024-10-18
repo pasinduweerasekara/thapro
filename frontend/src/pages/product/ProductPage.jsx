@@ -1,4 +1,5 @@
 import React, {useContext, useState } from 'react';
+import { ToastContainer, toast } from "react-toastify";
 import './productpage.css';
 import { ScrollRestoration, useParams } from 'react-router-dom';
 import { ProductContext } from '../../context/ProductsProvider';
@@ -14,32 +15,27 @@ const ProductPage = () => {
     // for testing
 const {id} = useParams()
 const productsSet =useContext(ProductContext)
-const product = productsSet.filter((product)=> id===product.id)[0]
+const product = productsSet.filter((product)=> id===product.slug)[0]
 // for testing
 
-    const productImages = [
-        product.cardImg,
-        'https://picsum.photos/id/1025/1200/800',
-        'https://picsum.photos/id/1043/1200/800',
-        'https://picsum.photos/id/1060/1200/800'
-    ];
+    const productImages = product.images
 
     // Handle increment and decrement of quantity
     const incrementQuantity = () => setQuantity(quantity + 1);
     const decrementQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
     const handleAddToCart = ()  =>{
-      console.log(product);
-      
       dispatch({
         type:'ADD_TO_CART',
         product: product,
         quantity: quantity,
       })
+      toast.success("Item added successfully!")
     }
 
     return (
         <div className="product-container">
           <ScrollRestoration/>
+          <ToastContainer/>
             <div className="product-image-section">
                 <div className="carousel">
                     <button className="carousel-control prev" onClick={() => setCurrentImage(currentImage === 0 ? productImages.length - 1 : currentImage - 1)}>
@@ -76,7 +72,9 @@ const product = productsSet.filter((product)=> id===product.id)[0]
                 </div>
 
                 <div className="product-actions">
+                    {/* <button className="purchase-button">Purchase Now</button> */}
                     <button className="purchase-button">Purchase Now</button>
+
                     <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
                 </div>
             </div>

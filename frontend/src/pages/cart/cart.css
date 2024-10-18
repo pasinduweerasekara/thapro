@@ -40,7 +40,8 @@
   }
   
   /* Button Styling */
-  .shop-now-button {
+  .cart-button {
+    display: block;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     color: #fff;
@@ -49,9 +50,10 @@
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 0 auto;
   }
   
-  .shop-now-button:hover {
+  .cart-button:hover {
     background-color: #272727;
   }
   
