@@ -5,6 +5,31 @@
 #video-player video{
     object-fit: cover;
 }
+.heading{
+    margin: .5em 0;
+    color: #404040;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+.heading::before,.heading::after{
+    content: '';
+    position: absolute;
+    background: #f4f4f4;
+    width: 40vw;
+    height: 2px;
+    top: 50%;
+    z-index: -1;
+}
+.heading::before{
+    left: 0;
+    transform: translateX(0%);
+}
+.heading::after{
+    right: 0;
+    transform: translateX(0%);
+}
 #video-player::after{
     content: '';
     width: 100%;

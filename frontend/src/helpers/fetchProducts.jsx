@@ -7,9 +7,6 @@ export const fetchProducts = async (url='',skip=0,limit=-0) => {
   // Append query parameters
   fullUrl.searchParams.append('skip', skip);
   fullUrl.searchParams.append('limit', limit);
-  
-  console.log(`Fetching: ${fullUrl}`);
-  
     try {
       let response = await fetch(fullUrl);
       

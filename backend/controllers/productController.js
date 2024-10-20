@@ -12,7 +12,7 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
   let products;
 
   if(Object.keys(query).length===0){
-    if (category === "all") {
+    if (category === "all" || category === undefined) {
       products = await Product.find();
     } else {
       products = await Product.find({ category });
@@ -20,7 +20,7 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
     if (products.length <1)
       products = await Product.find({gender:category})
   }else{
-    if (category === "all") {
+    if (category === "all" || category === undefined) {
       products = await Product.find().skip(query.skip).limit(query.limit)
     } else {
       products = await Product.find({ category }).skip(query.skip).limit(query.limit)
@@ -57,6 +57,19 @@ const getProductByIdentifier = asyncHandler(async (req, res) => {
 
   res.status(200).json(product);
 });
+
+// @desc Get featured product
+// @route GET /api/products/featured
+// @access public
+const getFeaturedProduct = async (req, res) => {
+    const featuredProducts = await Product.find({ featured: true })
+    const featuredProduct = featuredProducts.pop()
+    if(!featuredProducts){
+    res.status(404);
+    throw new Error("Featured products not found");
+    }
+    res.status(200).json(featuredProduct)
+  }
 
 // @desc Create a new product
 // @route POST /api/products
@@ -143,6 +156,7 @@ const generateSKU = (category, color) => {
 };
 
 module.exports = {
+  getFeaturedProduct,
   getProductsByCategory,
   getProductByIdentifier,
   createProduct,

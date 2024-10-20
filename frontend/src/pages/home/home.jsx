@@ -1,36 +1,59 @@
-import React, { Suspense, useContext, useEffect, useState } from 'react'
-import './home.css'
+import React, { Suspense, useEffect, useState } from 'react';
+import './home.css';
 
-import Hero from '../../components/hero/hero'
-import ProductGallery from '../../components/productgallery/productgallery'
+import Hero from '../../components/hero/hero';
+import ProductGallery from '../../components/productgallery/productgallery';
+import CategoriesContainer from '../../components/categoriescontainer/categoriescontainer';
+import FeaturedProduct from '../../components/featuredproduct/featuredproduct';
+import { fetchProducts } from '../../helpers/fetchProducts';
 
-import cardImg4 from '../../assets/4.jpg'
-import CategoriesContainer from '../../components/categoriescontainer/categoriescontainer'
-import { ProductContext} from '../../context/ProductsProvider'
-import FeaturedProduct from '../../components/featuredproduct/featuredproduct'
-import { fetchProducts } from '../../helpers/fetchProducts'
 function Home() {
   const [productsSet, setProductsSet] = useState([]);
+  const [featuredProduct, setFeaturedProduct] = useState({});
+
   useEffect(() => {
     const provideData = async () => {
-      const products = await fetchProducts('http://localhost:3000/api/products/all',0,8); // Pass the URL as an argument
-      setProductsSet(products); // Update the state with fetched products
+      try {
+        const products = await fetchProducts('http://localhost:3000/api/products/all', 0, 4);
+        setProductsSet(products);
+
+        const currentFeaturedProduct = await fetchProducts('http://localhost:3000/api/products/featured');
+        if (currentFeaturedProduct) {
+          setFeaturedProduct(currentFeaturedProduct);
+        } else {
+          console.warn("No featured product found!");
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
 
-    provideData(); // Fetch products when the component mounts
-  }, [])
+    provideData();
+  }, []); // Runs once on mount
 
   return (
     <>
-    <Suspense fallback={<div>Loading...</div>}>
-    <Hero/>
-    <FeaturedProduct image={cardImg4} price={"3250.00"} title={"Bifold wallet (Crocodile printed leather)"} description={"This is the description This is the description This is the description This is the description"} promotion={"25% off"}/>
-    <span className="devider"></span>
-    <ProductGallery productsSet={productsSet}/>
-    <CategoriesContainer/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Hero />
+        {featuredProduct.images && (<>
+          <h1 className="heading">Featured</h1>
+          <FeaturedProduct
+            category={featuredProduct.category}
+            slug={featuredProduct.slug}
+            image={featuredProduct.images[0]}
+            price={featuredProduct.price}
+            title={featuredProduct.name}
+            description={featuredProduct.description}
+            promotion={"25% off"}
+          />
+        </>)}
+        {/* <span className="devider"></span> */}
+        <h1 className="heading">Latest Products</h1>
+        <ProductGallery productsSet={productsSet} />
+        <CategoriesContainer />
       </Suspense>
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

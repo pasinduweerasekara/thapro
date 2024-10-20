@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const {
+  getFeaturedProduct,
   getProductsByCategory,
   getProductByIdentifier,
   createProduct,
   updateProduct,
   deleteProduct
 } = require("../controllers/productController");
+
+// Route to get featured product
+router.route("/featured").get(getFeaturedProduct);
 
 // Route to get all products or products by category
 router.route("/").get(getProductsByCategory);
