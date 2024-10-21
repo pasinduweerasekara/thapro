@@ -13,12 +13,25 @@ const app = express();
 app.use(express.json()); // Parse JSON bodies
 
 // CORS options
+const allowedOrigins = [
+  "http://localhost:5173",  // Frontend in development
+  "http://localhost:5174",  // Production site
+];
+
 const corsOptions = {
-  origin: "http://localhost:5173", // Frontend's domain
-  optionsSuccessStatus: 200, 
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  optionsSuccessStatus: 200, // For legacy browsers
 };
 
 app.use(cors(corsOptions));
+
 
 // Define the port
 const port = process.env.PORT || 5000; // Default to 5000 if PORT is not defined

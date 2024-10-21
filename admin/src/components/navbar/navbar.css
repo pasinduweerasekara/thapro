@@ -74,8 +74,8 @@ li{
           flex-direction: column;
   gap: 1rem;
   background-color: var(--primary);
-  position: absolute;
-  top: 1rem;
+  position: fixed;
+  bottom: 0;
   left: 0;
   z-index: 99;
   width: 200px;
@@ -92,9 +92,9 @@ li{
   -o-transition: transform 500ms ease-in-out;
   transition: transform 500ms ease-in-out;
   transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
-  -webkit-transform: translateY(-1rem) translateX(-100%);
-      -ms-transform: translateY(-1rem) translateX(-100%);
-          transform: translateY(-1rem) translateX(-100%);
+  -webkit-transform: translateY(-1rem) translateX(-75%);
+      -ms-transform: translateY(-1rem) translateX(-75%);
+          transform: translateY(-1rem) translateX(-75%);
 }
 .link-item{
   width: 200px;
@@ -110,10 +110,13 @@ li{
 }
 
 .nav-link-text{
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   color: var(--secondary);
   padding: .5em 1em;
+  border-right: 5px solid transparent;
 }
 
 .menu-icon {
@@ -138,7 +141,9 @@ li{
           justify-content: space-between;
 }
 .nav-link-text.active{
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   background-color: var(--menu);
   border-right: 5px solid #4e4e4e;
@@ -340,7 +345,7 @@ li{
 }
 
 /* Media queries */
-@media only screen and (min-width: 972px) {
+/* @media only screen and (min-width: 972px) {
   #navbar {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -402,4 +407,4 @@ li{
   #drop-down-icon.active{
     transform: rotate(180deg);
   }
-}
+} */
