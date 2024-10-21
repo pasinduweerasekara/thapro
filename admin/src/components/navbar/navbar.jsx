@@ -5,6 +5,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import Footer from "../footer/footer";
+import Content from "../content/content";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -34,16 +35,6 @@ function Navbar() {
     };
   }, [handleScroll]);
 
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === "Escape") {
-        setSearch(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, []);
 
   useEffect(() => {
     document.body.classList.toggle("noscroll", open || search);
@@ -62,6 +53,20 @@ function Navbar() {
   return (
     <>
       <nav id="navbar" className={navbarHide ? "navbar-hide" : ""}>
+      <div id="menu-icons">
+          <div
+            id="hamburger-btn"
+            onClick={() => {
+              setOpen(!open);
+              setSearch(false);
+            }}
+            className={open ? "btn-open" : ""}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
         <div id="logo-container" onClick={() => navigate("/")}>
           <h1 id="nav-logo">THAPRO-admin</h1>
         </div>
@@ -93,23 +98,9 @@ function Navbar() {
             </NavLink>
           </li>
         </ul>
-        <div id="menu-icons">
-          <div
-            id="hamburger-btn"
-            onClick={() => {
-              setOpen(!open);
-              setSearch(false);
-            }}
-            className={open ? "btn-open" : ""}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
       </nav>
       <Outlet />
-      <Footer />
+      <Content/>
     </>
   );
 }
